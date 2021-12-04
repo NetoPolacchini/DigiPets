@@ -4,6 +4,12 @@ public class Carteira {
     private Vacina vacina;
     private Animal animal;
 
+    public Carteira(Vacina vacina, Animal animal) {
+        this.vacina = vacina;
+        this.animal = animal;
+    }
+    
+
     public Vacina getVacina() {
         return vacina;
     }

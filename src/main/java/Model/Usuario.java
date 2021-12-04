@@ -12,6 +12,18 @@ public class Usuario {
     private String senha;
     private String tipo_usuario;
 
+    public Usuario(String nome, String email, String telefone, String endereco, String cpf, String senha, String tipo_usuario) {
+        this.nome = nome;
+        this.email = email;
+        this.telefone = telefone;
+        this.endereco = endereco;
+        this.cpf = cpf;
+        this.senha = senha;
+        this.tipo_usuario = tipo_usuario;
+    }
+    
+    
+
     public String getNome() {
         return nome;
     }
