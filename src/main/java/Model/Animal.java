@@ -92,6 +92,6 @@ public class Animal {
         this.obs_gerais = obs_gerais;
     }
     
-    
+    public void cadastrarAnimal(Animal animal){};
     
 }
