@@ -8,15 +8,11 @@ public class Vacina {
     private String nome_vacina;
     private int cod_vacina;
     private Date data_aplic_vacina;
-    private String lote_vacina;
-    private Date data_fab_vacina;
 
     public Vacina(String nome_vacina, int cod_vacina, Date data_aplic_vacina, String lote_vacina, Date data_fab_vacina) {
         this.nome_vacina = nome_vacina;
         this.cod_vacina = cod_vacina;
         this.data_aplic_vacina = data_aplic_vacina;
-        this.lote_vacina = lote_vacina;
-        this.data_fab_vacina = data_fab_vacina;
     }
     
     
@@ -45,22 +41,5 @@ public class Vacina {
         this.data_aplic_vacina = data_aplic_vacina;
     }
 
-    public String getLote_vacina() {
-        return lote_vacina;
-    }
-
-    public void setLote_vacina(String lote_vacina) {
-        this.lote_vacina = lote_vacina;
-    }
-
-    public Date getData_fab_vacina() {
-        return data_fab_vacina;
-    }
-
-    public void setData_fab_vacina(Date data_fab_vacina) {
-        this.data_fab_vacina = data_fab_vacina;
-    }
-    
-    
     
 }
