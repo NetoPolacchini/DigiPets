@@ -14,9 +14,7 @@ public class Animal {
     public Animal(String nome_animal, int cod_animal, String sexo_animal, String raca_animal) {
         this.nome_animal = nome_animal;
         this.cod_animal = cod_animal;
-        this.data_nasc_animal = data_nasc_animal;
         this.sexo_animal = sexo_animal;
-        this.especie_animal = especie_animal;
     }
     
     

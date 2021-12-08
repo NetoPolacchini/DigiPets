@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package View;
-
 /**
  *
  * @author joao_
@@ -72,11 +71,6 @@ public class Login extends javax.swing.JFrame {
         background.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, -1, -1));
 
         jTextFieldLoginCpf.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jTextFieldLoginCpf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldLoginCpfActionPerformed(evt);
-            }
-        });
         background.add(jTextFieldLoginCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 210, -1));
 
         jLabel3.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -117,10 +111,6 @@ public class Login extends javax.swing.JFrame {
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
         System.exit(0);
     }//GEN-LAST:event_jLabel10MouseClicked
-
-    private void jTextFieldLoginCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldLoginCpfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldLoginCpfActionPerformed
 
     /**
      * @param args the command line arguments
