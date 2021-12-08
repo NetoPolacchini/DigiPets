@@ -9,13 +9,13 @@ public class Animal {
     private String nome_animal;
     private int cod_animal;
     private Date data_nasc_animal;
-    private boolean sexo_animal;
+    private String sexo_animal;
     private String especie_animal;
     private String raca_animal;
     private float peso_animal;
     private String obs_gerais;
 
-    public Animal(String nome_animal, int cod_animal, Date data_nasc_animal, boolean sexo_animal, String especie_animal, String raca_animal, float peso_animal, String obs_gerais) {
+    public Animal(String nome_animal, int cod_animal, Date data_nasc_animal, String sexo_animal, String especie_animal, String raca_animal, float peso_animal, String obs_gerais) {
         this.nome_animal = nome_animal;
         this.cod_animal = cod_animal;
         this.data_nasc_animal = data_nasc_animal;
@@ -52,7 +52,7 @@ public class Animal {
         this.data_nasc_animal = data_nasc_animal;
     }
 
-    public boolean isSexo_animal() {
+    public String isSexo_animal() {
         return sexo_animal;
     }
 
