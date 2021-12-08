@@ -30,15 +30,14 @@ public class Login extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelSenha = new javax.swing.JLabel();
         jTextFieldLoginCpf = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelCPF = new javax.swing.JLabel();
         jPasswordFieldLogin = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        jButtonEntrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(500, 609));
 
         background.setBackground(new java.awt.Color(135, 206, 235));
         background.setForeground(new java.awt.Color(255, 255, 255));
@@ -66,24 +65,29 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setText("Digipets");
         background.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel2.setText("Senha:");
-        background.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, -1, -1));
+        jLabelSenha.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabelSenha.setText("Senha:");
+        background.add(jLabelSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, -1, -1));
 
         jTextFieldLoginCpf.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         background.add(jTextFieldLoginCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 210, -1));
 
-        jLabel3.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel3.setText("CPF:");
-        background.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, -1, -1));
+        jLabelCPF.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabelCPF.setText("CPF:");
+        background.add(jLabelCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, -1, -1));
 
         jPasswordFieldLogin.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         background.add(jPasswordFieldLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, 210, -1));
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jButton1.setText("Entrar");
-        background.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 450, 110, 60));
+        jButtonEntrar.setBackground(new java.awt.Color(255, 255, 255));
+        jButtonEntrar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jButtonEntrar.setText("Entrar");
+        jButtonEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEntrarActionPerformed(evt);
+            }
+        });
+        background.add(jButtonEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 450, 110, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,6 +115,10 @@ public class Login extends javax.swing.JFrame {
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
         System.exit(0);
     }//GEN-LAST:event_jLabel10MouseClicked
+
+    private void jButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonEntrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -149,12 +157,12 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel background;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonEntrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabelCPF;
+    private javax.swing.JLabel jLabelSenha;
     private javax.swing.JPasswordField jPasswordFieldLogin;
     private javax.swing.JTextField jTextFieldLoginCpf;
     // End of variables declaration//GEN-END:variables

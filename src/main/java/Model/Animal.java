@@ -1,57 +1,86 @@
 
 package Model;
 
+import DAO.AnimalDAO;
 import java.util.Date;
 
 
 public class Animal {
     
-    private String nome_animal;
-    private int cod_animal;
-    private String raca_animal;
-    private String sexo_animal;
+    private String nome;
+    private int codl;
+    private String raca;
+    private Boolean sexo;
+    private String especie;
+    private String obsGerais;
 
-    public Animal(String nome_animal, int cod_animal, String sexo_animal, String raca_animal) {
-        this.nome_animal = nome_animal;
-        this.cod_animal = cod_animal;
-        this.sexo_animal = sexo_animal;
+    public Animal(String nome, String raca, Boolean sexo, String especie, String obsGerais) {
+        this.nome = nome;
+        this.raca = raca;
+        this.sexo = sexo;
+        this.especie = especie;
+        this.obsGerais = obsGerais;
+    }
+
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public int getCodl() {
+        return codl;
+    }
+
+    public void setCodl(int codl) {
+        this.codl = codl;
+    }
+
+    public String getRaca() {
+        return raca;
+    }
+
+    public void setRaca(String raca) {
+        this.raca = raca;
+    }
+
+    public Boolean getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(Boolean sexo) {
+        this.sexo = sexo;
+    }
+
+    public String getObsGerais() {
+        return obsGerais;
+    }
+
+    public void setObsGerais(String obsGerais) {
+        this.obsGerais = obsGerais;
+    }
+
+    public String getEspecie() {
+        return especie;
+    }
+
+    public void setEspecie(String especie) {
+        this.especie = especie;
     }
     
     
-
-    public String getNome_animal() {
-        return nome_animal;
-    }
-
-    public void setNome_animal(String nome_animal) {
-        this.nome_animal = nome_animal;
-    }
-
-    public int getCod_animal() {
-        return cod_animal;
-    }
-
-    public void setCod_animal(int cod_animal) {
-        this.cod_animal = cod_animal;
-    }
-
-    public String getSexo_animal() {
-        return sexo_animal;
-    }
-
-    public void setSexo_animal(String sexo_animal) {
-        this.sexo_animal = sexo_animal;
-    }
-
-    public String getRaca_animal() {
-        return raca_animal;
-    }
-
-    public void setRaca_animal(String raca_animal) {
-        this.raca_animal = raca_animal;
-    }
-
     
-    public void cadastrarAnimal(Animal animal){};
+    
+
+   
+    
+    public static void cadastrarAnimal(Animal animal){
+        
+        return new AnimalDAO().cadastrarAnimal(animal);
+        
+    };
     
 }
