@@ -4,7 +4,8 @@ USE Digipets;
 create table animal(
 	nome_animal varchar(45),
 	cod_animal int,
-    especie_animal varchar(45),
+    raca_animal varchar(45),
+    sexo_animal varchar(45),
     primary key (cod_animal)
 );
 
