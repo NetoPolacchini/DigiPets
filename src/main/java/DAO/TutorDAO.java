@@ -1,29 +1,28 @@
 package DAO;
 
-import Model.Animal;
-import java.sql.Connection;
+import Model.Tutor;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class AnimalDAO {
+public class TutorDAO {
 
-    public void cadastrarAnimal(Animal animal) throws ExceptionDAO {
-        String sql = "INSERT INTO animal(nome, raca, sexo, especie, obs_gerais)";
+    public void cadastrarTutor(Tutor tutor) throws ExceptionDAO, SQLException {
+        String sql = "INSERT INTO tutor(nome, cpf, senha, tipo_usuario, cod_tutor)";
         PreparedStatement pStatement = null;
 
         try {
 
             pStatement = ConnectionMVC.getConnection().prepareStatement(sql);
-            pStatement.setString(1, animal.getNome());
-            pStatement.setString(2, animal.getRaca());
-            pStatement.setBoolean(3, animal.getSexo());
-            pStatement.setString(4, animal.getEspecie());
-            pStatement.setString(5, animal.getObsGerais());
+            pStatement.setString(1, tutor.getNome());
+            pStatement.setString(2, tutor.getCpf());
+            pStatement.setString(3, tutor.getSenha());
+            pStatement.setString(4, tutor.getTipo_usuario());
+            pStatement.setInt(5, tutor.getCod_tutor());
             pStatement.execute();
         } catch (SQLException e) {
-            throw new ExceptionDAO("Erro ao cadastrar animal");
+            throw new ExceptionDAO("Erro ao cadastrar tutor");
         } finally {
             try {
                 if (pStatement != null) {
@@ -40,10 +39,10 @@ public class AnimalDAO {
         }
     }
 
-    public ArrayList<Animal> listarAnimal() throws ExceptionDAO, SQLException {
-        String sql = " select * from animal";
+    public ArrayList<Tutor> listarTutor() throws ExceptionDAO, SQLException {
+        String sql = " select * from tutor";
         PreparedStatement pStatement = null;
-        ArrayList<Animal> animal = null;
+        ArrayList<Tutor> tutor = null;
 
         try {
             pStatement = ConnectionMVC.getConnection().prepareStatement(sql);
@@ -51,19 +50,16 @@ public class AnimalDAO {
 
             if (rs != null) {
                 
-                animal = new ArrayList<Animal>();
+                tutor = new ArrayList<Tutor>();
                 
                 while (rs.next()) {
                     
-                    Animal anima = new Animal();
+                    Tutor tuto = new Tutor();
                     
-                    anima.setCod(rs.getInt("cod"));
-                    anima.setNome(rs.getString("nome"));
-                    anima.setRaca(rs.getString("raca"));
-                    anima.setSexo(rs.getBoolean("sexo"));
-                    anima.setEspecie(rs.getString("especie"));
-                    anima.setObsGerais(rs.getString("obsGerais"));
-                    animal.add(anima);
+                    tuto.setCod_tutor(rs.getInt("cod"));
+                    tuto.setNome(rs.getString("nome"));
+                    tuto.setCpf(rs.getString("cpf"));
+                    tuto.add(tuto);
                 }
             }
         } catch (SQLException e) {
@@ -85,7 +81,7 @@ public class AnimalDAO {
             throw new ExceptionDAO("Erro ao fechar conexão" + e);
         }
 
-        return animal;
-
+        return tutor;
     }
+    
 }

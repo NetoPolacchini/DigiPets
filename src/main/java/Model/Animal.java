@@ -78,7 +78,6 @@ public class Animal {
 
     public static void cadastrarAnimal(Animal animal) throws ExceptionDAO {
         new AnimalDAO().cadastrarAnimal(animal);
-
     }
 
     public ArrayList<Animal> listarAnimal() throws ExceptionDAO, SQLException{
