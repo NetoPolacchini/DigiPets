@@ -13,12 +13,9 @@ public class AnimalController {
         }
         return false;
     }
-    	
-
-	public ArrayList<Animal> listarAnimal() throws ExceptionDAO, SQLException {
+    
+    public ArrayList<Animal> listarAnimal() throws ExceptionDAO, SQLException {
 		return new Animal().listarAnimal();
-	}
-    
-      
-    
+    }
+        
 };
