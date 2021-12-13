@@ -15,6 +15,8 @@ public class Tutor extends Usuario {
         this.cod_tutor = cod_tutor;
     }   
 
+    public Tutor(){}
+
     public int getCod_tutor() {
         return cod_tutor;
     }
@@ -34,5 +36,5 @@ public class Tutor extends Usuario {
     public void add(Tutor tuto) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

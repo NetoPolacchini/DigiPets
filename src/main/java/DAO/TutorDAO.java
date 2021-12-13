@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class TutorDAO {
 
     public void cadastrarTutor(Tutor tutor) throws ExceptionDAO, SQLException {
-        String sql = "INSERT INTO tutor(nome, cpf, senha, tipo_usuario, cod_tutor)";
+        String sql = "INSERT INTO tutor(nome, cpf, senha, tipo_usuario)";
         PreparedStatement pStatement = null;
 
         try {
@@ -19,7 +19,6 @@ public class TutorDAO {
             pStatement.setString(2, tutor.getCpf());
             pStatement.setString(3, tutor.getSenha());
             pStatement.setString(4, tutor.getTipo_usuario());
-            pStatement.setInt(5, tutor.getCod_tutor());
             pStatement.execute();
         } catch (SQLException e) {
             throw new ExceptionDAO("Erro ao cadastrar tutor");

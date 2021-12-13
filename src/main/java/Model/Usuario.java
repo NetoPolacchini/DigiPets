@@ -15,6 +15,8 @@ public class Usuario {
         this.senha = senha;
         this.tipo_usuario = tipo_usuario;
     }
+    
+    public Usuario(){}
    
 
     public String getNome() {
