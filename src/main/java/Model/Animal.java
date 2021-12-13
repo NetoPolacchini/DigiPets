@@ -1,20 +1,23 @@
-
 package Model;
 
 import DAO.AnimalDAO;
+import DAO.ExceptionDAO;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 
-
 public class Animal {
+
     
+    private int cod;
     private String nome;
-    private int codl;
     private String raca;
     private Boolean sexo;
     private String especie;
     private String obsGerais;
 
     public Animal(String nome, String raca, Boolean sexo, String especie, String obsGerais) {
+
         this.nome = nome;
         this.raca = raca;
         this.sexo = sexo;
@@ -22,6 +25,8 @@ public class Animal {
         this.obsGerais = obsGerais;
     }
 
+    public Animal() {
+    }
 
     public String getNome() {
         return nome;
@@ -31,12 +36,12 @@ public class Animal {
         this.nome = nome;
     }
 
-    public int getCodl() {
-        return codl;
+    public int getCod() {
+        return cod;
     }
 
-    public void setCodl(int codl) {
-        this.codl = codl;
+    public void setCod(int cod) {
+        this.cod = cod;
     }
 
     public String getRaca() {
@@ -70,17 +75,14 @@ public class Animal {
     public void setEspecie(String especie) {
         this.especie = especie;
     }
-    
-    
-    
-    
 
-   
-    
-    public static void cadastrarAnimal(Animal animal){
-        
-        return new AnimalDAO().cadastrarAnimal(animal);
-        
-    };
-    
+    public static void cadastrarAnimal(Animal animal) throws ExceptionDAO {
+        new AnimalDAO().cadastrarAnimal(animal);
+
+    }
+
+    public ArrayList<Animal> listarAnimal() throws ExceptionDAO, SQLException{
+		return new AnimalDAO().listarAnimal();
+    }
+
 }

@@ -4,21 +4,35 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionMVC {
+private static Connection connection = null;
 
-    public Connection getConnection() {
-        Connection conn = null;
+    public static Connection getConnection() {
+  /*
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/armario?useSLL=false", "root", "");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/armario?useSLL=false", "root", "");
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return conn;
-
+*/
+  if (connection == null){
+   try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/armario?useSLL=false", "root", "");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } 
+  }
+        return connection;
+  
     }
-
+    
 }

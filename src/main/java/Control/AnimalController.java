@@ -1,6 +1,8 @@
 package Control;
 import DAO.ExceptionDAO;
 import Model.Animal;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class AnimalController {
     public static boolean cadastrarAnimal(String nome, String raca, Boolean sexo, String especie, String obs_gerais) throws ExceptionDAO {
@@ -11,6 +13,11 @@ public class AnimalController {
         }
         return false;
     }
+    	
+
+	public ArrayList<Animal> listarAnimal() throws ExceptionDAO, SQLException {
+		return new Animal().listarAnimal();
+	}
     
       
     

@@ -1,4 +1,8 @@
 package Model;
+
+import DAO.CarteiraDAO;
+import DAO.ExceptionDAO;
+
 public class Carteira {
     
     private Vacina vacina;
@@ -8,6 +12,8 @@ public class Carteira {
         this.vacina = vacina;
         this.animal = animal;
     }
+    
+    public Carteira(){};
     
 
     public Vacina getVacina() {
@@ -26,6 +32,10 @@ public class Carteira {
         this.animal = animal;
     }
     
+    public static void cadastrarCarteira(Carteira carteira) throws ExceptionDAO {
+        new CarteiraDAO().cadastrarCarteira(carteira);
+
+    }
     
     
  
