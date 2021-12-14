@@ -53,7 +53,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jScrollPane7" alignment="0" min="-2" pref="689" max="-2" attributes="0"/>
                               <Component id="jLabel20" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextFieldCodigoAnimal" alignment="0" min="-2" pref="274" max="-2" attributes="0"/>
+                              <Component id="txtCod" alignment="0" min="-2" pref="274" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="SubMenu7" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -72,7 +72,7 @@
                   <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                   <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jTextFieldCodigoAnimal" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtCod" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="89" max="32767" attributes="0"/>
                   <Component id="jButton8" min="-2" pref="37" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="130" max="-2" attributes="0"/>
@@ -133,7 +133,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton8ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextFieldCodigoAnimal">
+        <Component class="javax.swing.JTextField" name="txtCod">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Roboto" size="14" style="0"/>

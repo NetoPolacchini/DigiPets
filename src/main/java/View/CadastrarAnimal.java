@@ -46,6 +46,8 @@ public class CadastrarAnimal extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jRadioButtonFemea = new javax.swing.JRadioButton();
         jRadioButtonMacho = new javax.swing.JRadioButton();
+        jLabel5 = new javax.swing.JLabel();
+        txtCod_dono = new javax.swing.JTextField();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(750, 740));
@@ -122,6 +124,11 @@ public class CadastrarAnimal extends javax.swing.JPanel {
         jRadioButtonMacho.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jRadioButtonMacho.setText("macho");
 
+        jLabel5.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jLabel5.setText("Código do Dono");
+
+        txtCod_dono.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -133,6 +140,8 @@ public class CadastrarAnimal extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtCod_dono, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
                     .addComponent(jLabel1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(289, 289, 289)
@@ -190,7 +199,11 @@ public class CadastrarAnimal extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldEpecieAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldObsGeraisAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(189, 189, 189)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCod_dono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(121, 121, 121)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(80, Short.MAX_VALUE))
         );
@@ -231,6 +244,7 @@ public class CadastrarAnimal extends javax.swing.JPanel {
             String especie = jTextFieldEpecieAnimal.getText();
             String obs_gerais = jTextFieldObsGeraisAnimal.getText();
             String sexo = buttonGroup1.getSelection().getActionCommand();
+            int cod_dono = Integer.parseInt(txtCod_dono.getText());
             
             sucesso = AnimalController.cadastrarAnimal(nome, raca, sexo, especie, obs_gerais);
 
@@ -255,6 +269,7 @@ public class CadastrarAnimal extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
@@ -265,5 +280,6 @@ public class CadastrarAnimal extends javax.swing.JPanel {
     private javax.swing.JTextField jTextFieldNomeAnimal;
     private javax.swing.JTextField jTextFieldObsGeraisAnimal;
     private javax.swing.JTextField jTextFieldRacaAnimal;
+    private javax.swing.JTextField txtCod_dono;
     // End of variables declaration//GEN-END:variables
 }

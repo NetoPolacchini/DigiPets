@@ -4,8 +4,13 @@
  * and open the template in the editor.
  */
 package View;
+import DAO.ExceptionDAO;
+import DAO.TutorDAO;
+import Model.Tutor;
 import java.awt.BorderLayout;
+import java.sql.SQLException;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,8 +21,9 @@ public class GerenciarAnimalSelecioneTutor extends javax.swing.JPanel {
     /**
      * Creates new form GerenciarAnimalSelecioneTutor
      */
-    public GerenciarAnimalSelecioneTutor() {
+    public GerenciarAnimalSelecioneTutor() throws ExceptionDAO, SQLException {
         initComponents();
+        loadTable();
     }
 
     /**
@@ -93,7 +99,15 @@ public class GerenciarAnimalSelecioneTutor extends javax.swing.JPanel {
             new String [] {
                 "Código", "CPF", "Nome"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTableTutores5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableTutores5MouseClicked(evt);
@@ -167,6 +181,24 @@ public class GerenciarAnimalSelecioneTutor extends javax.swing.JPanel {
         this.revalidate();
         this.repaint();
     }
+    
+    private void loadTable() throws ExceptionDAO, SQLException{
+        DefaultTableModel modelo = (DefaultTableModel)jTableTutores5.getModel();
+        modelo.setNumRows(0);
+        
+        TutorDAO tdao = new TutorDAO();
+        
+        for(Tutor t: tdao.listarTutor()){
+            
+            modelo.addRow(new Object[]{
+                t.getCod_tutor(),
+                t.getCpf(),
+                t.getNome()
+            });
+            
+        }
+        
+    };
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel SubMenu5;

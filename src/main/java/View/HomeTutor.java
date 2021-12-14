@@ -58,8 +58,11 @@ public class HomeTutor extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel4.setText("Consultar carteira");
-
-        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\joao_\\Documents\\NetBeansProjects\\ProjetoDigipets\\src\\main\\java\\com\\mycompany\\projetodigipets\\view\\imagens\\icons8_document_50px.png")); // NOI18N
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout BotaoConsultarCarteiraLayout = new javax.swing.GroupLayout(BotaoConsultarCarteira);
         BotaoConsultarCarteira.setLayout(BotaoConsultarCarteiraLayout);
@@ -86,8 +89,6 @@ public class HomeTutor extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe Script", 3, 24)); // NOI18N
         jLabel1.setText("Digipets");
-
-        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\joao_\\Documents\\NetBeansProjects\\ProjetoDigipets\\src\\main\\java\\com\\mycompany\\projetodigipets\\view\\imagens\\icons8_doge_100px.png")); // NOI18N
 
         javax.swing.GroupLayout MenuLayout = new javax.swing.GroupLayout(Menu);
         Menu.setLayout(MenuLayout);
@@ -208,15 +209,16 @@ public class HomeTutor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotaoConsultarCarteiraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoConsultarCarteiraMouseClicked
-        ConsultarCarteiraSelecioneAnimal consultarCarteiraSelecioneAnimal = null;
         try {
-            consultarCarteiraSelecioneAnimal = new ConsultarCarteiraSelecioneAnimal();
+            ConsultarCarteiraSelecioneAnimal consultarCarteiraSelecioneAnimal = new ConsultarCarteiraSelecioneAnimal();
+            showPanel(consultarCarteiraSelecioneAnimal);
         } catch (ExceptionDAO ex) {
             Logger.getLogger(HomeTutor.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(HomeTutor.class.getName()).log(Level.SEVERE, null, ex);
         }
-        showPanel(consultarCarteiraSelecioneAnimal);
+        
+
     }//GEN-LAST:event_BotaoConsultarCarteiraMouseClicked
 
     private void BotaoConsultarCarteiraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoConsultarCarteiraMousePressed
@@ -230,6 +232,10 @@ public class HomeTutor extends javax.swing.JFrame {
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
         this.setExtendedState(ICONIFIED);
     }//GEN-LAST:event_jLabel11MouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel4MouseClicked
 
     public void showPanel(JPanel panel){
         panel.setSize(750,740);

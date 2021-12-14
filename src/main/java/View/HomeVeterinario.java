@@ -1,7 +1,11 @@
 
 package View;
+import DAO.ExceptionDAO;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 
 public class HomeVeterinario extends javax.swing.JFrame {
@@ -292,7 +296,14 @@ public class HomeVeterinario extends javax.swing.JFrame {
     }//GEN-LAST:event_BotaoGerenciarUsuarioMouseClicked
 
     private void BotaoConsultarCarteiraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoConsultarCarteiraMouseClicked
-        ConsultarCarteiraSelecioneTutor consultarCarteiraSelecioneTutor = new ConsultarCarteiraSelecioneTutor();
+        ConsultarCarteiraSelecioneTutor consultarCarteiraSelecioneTutor = null;
+        try {
+            consultarCarteiraSelecioneTutor = new ConsultarCarteiraSelecioneTutor();
+        } catch (ExceptionDAO ex) {
+            Logger.getLogger(HomeVeterinario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(HomeVeterinario.class.getName()).log(Level.SEVERE, null, ex);
+        }
         showPanel(consultarCarteiraSelecioneTutor);
     }//GEN-LAST:event_BotaoConsultarCarteiraMouseClicked
 

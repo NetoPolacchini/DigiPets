@@ -4,8 +4,13 @@
  * and open the template in the editor.
  */
 package View;
+import DAO.AnimalDAO;
+import DAO.ExceptionDAO;
+import Model.Animal;
 import java.awt.BorderLayout;
+import java.sql.SQLException;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,8 +21,9 @@ public class GerenciarVacinaSelecioneAnimal extends javax.swing.JPanel {
     /**
      * Creates new form GerenciarVacinaSelecioneAnimal
      */
-    public GerenciarVacinaSelecioneAnimal() {
+    public GerenciarVacinaSelecioneAnimal() throws ExceptionDAO, SQLException {
         initComponents();
+        loadTable();
     }
 
     /**
@@ -166,6 +172,24 @@ public class GerenciarVacinaSelecioneAnimal extends javax.swing.JPanel {
         this.add(panel, BorderLayout.CENTER);
         this.revalidate();
         this.repaint();
+    }
+    
+     private void loadTable() throws ExceptionDAO, SQLException{
+        DefaultTableModel modelo = (DefaultTableModel)jTableTutores5.getModel();
+        modelo.setNumRows(0);
+        
+        AnimalDAO adao = new AnimalDAO();
+        
+        for(Animal a: adao.listarAnimal()){
+            
+            modelo.addRow(new Object[]{
+                a.getCod(),
+                a.getNome(),
+                a.getEspecie()
+            });
+            
+        }
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

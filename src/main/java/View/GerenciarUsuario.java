@@ -1,7 +1,11 @@
 
 package View;
+import DAO.ExceptionDAO;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 
 public class GerenciarUsuario extends javax.swing.JPanel {
@@ -163,7 +167,14 @@ public class GerenciarUsuario extends javax.swing.JPanel {
     }//GEN-LAST:event_BotaoGerenciarTutorMouseClicked
 
     private void BotaoGerenciarAnimalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoGerenciarAnimalMouseClicked
-        GerenciarAnimalSelecioneTutor gerenciarAnimalSelecioneTutor = new GerenciarAnimalSelecioneTutor();
+        GerenciarAnimalSelecioneTutor gerenciarAnimalSelecioneTutor = null;
+        try {
+            gerenciarAnimalSelecioneTutor = new GerenciarAnimalSelecioneTutor();
+        } catch (ExceptionDAO ex) {
+            Logger.getLogger(GerenciarUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(GerenciarUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
         showPanel(gerenciarAnimalSelecioneTutor);
     }//GEN-LAST:event_BotaoGerenciarAnimalMouseClicked
 

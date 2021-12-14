@@ -9,6 +9,8 @@ import DAO.ExceptionDAO;
 import DAO.TutorDAO;
 import Model.Tutor;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -208,8 +210,21 @@ public class AlterarTutor extends javax.swing.JPanel {
     }//GEN-LAST:event_jTableTutoresMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
+        try {
+            // TODO add your handling code here:
+            alterarTutor();
+        } catch (ExceptionDAO ex) {
+            Logger.getLogger(AlterarTutor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AlterarTutor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            loadTable();
+        } catch (ExceptionDAO ex) {
+            Logger.getLogger(AlterarTutor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AlterarTutor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void loadTable() throws ExceptionDAO, SQLException{
@@ -230,6 +245,27 @@ public class AlterarTutor extends javax.swing.JPanel {
         
     };
     
+    public void alterarTutor() throws ExceptionDAO, SQLException {
+       
+        if(jTableTutores.getSelectedRow() != -1) {
+        
+            Tutor t = new Tutor();
+            TutorDAO tdao = new TutorDAO();
+            
+            t.setNome(txtNome.getText());
+            t.setCpf(txtCpf.getText());
+            t.setCod_tutor((int) jTableTutores.getValueAt(jTableTutores.getSelectedRow(), 0));
+            
+            tdao.alterarTutor(t);
+            
+            txtNome.setText("");
+            txtCpf.setText("");
+            
+            loadTable();
+            
+        }
+  
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel SubMenu;

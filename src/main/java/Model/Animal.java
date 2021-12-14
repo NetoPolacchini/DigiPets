@@ -7,13 +7,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Animal {
-
-    public static void alterarAnimal(Animal animal) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    
+ 
     private int cod;
+    private int cod_dono;
     private String nome;
     private String raca;
     private String sexo;
@@ -79,6 +75,16 @@ public class Animal {
     public void setEspecie(String especie) {
         this.especie = especie;
     }
+
+    public int getCod_dono() {
+        return cod_dono;
+    }
+
+    public void setCod_dono(int cod_dono) {
+        this.cod_dono = cod_dono;
+    }
+    
+    
 
     public static void cadastrarAnimal(Animal animal) throws ExceptionDAO {
         new AnimalDAO().cadastrarAnimal(animal);

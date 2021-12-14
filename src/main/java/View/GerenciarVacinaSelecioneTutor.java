@@ -6,6 +6,7 @@
 package View;
 import Control.TutorController;
 import DAO.ExceptionDAO;
+import DAO.TutorDAO;
 import Model.Tutor;
 import java.awt.BorderLayout;
 import java.sql.SQLException;
@@ -159,7 +160,14 @@ public class GerenciarVacinaSelecioneTutor extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        GerenciarVacinaSelecioneAnimal gerenciarVacinaSelecioneAnimal = new GerenciarVacinaSelecioneAnimal();
+        GerenciarVacinaSelecioneAnimal gerenciarVacinaSelecioneAnimal = null;
+        try {
+            gerenciarVacinaSelecioneAnimal = new GerenciarVacinaSelecioneAnimal();
+        } catch (ExceptionDAO ex) {
+            Logger.getLogger(GerenciarVacinaSelecioneTutor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(GerenciarVacinaSelecioneTutor.class.getName()).log(Level.SEVERE, null, ex);
+        }
         showPanel(gerenciarVacinaSelecioneAnimal);
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -188,6 +196,24 @@ public class GerenciarVacinaSelecioneTutor extends javax.swing.JPanel {
          jTableTutores5.setModel(tableModel);
     
   }
+  
+  private void loadTable() throws ExceptionDAO, SQLException{
+        DefaultTableModel modelo = (DefaultTableModel)jTableTutores5.getModel();
+        modelo.setNumRows(0);
+        
+        TutorDAO tdao = new TutorDAO();
+        
+        for(Tutor t: tdao.listarTutor()){
+            
+            modelo.addRow(new Object[]{
+                t.getCod_tutor(),
+                t.getCpf(),
+                t.getNome()
+            });
+            
+        }
+        
+    };
         
 
     

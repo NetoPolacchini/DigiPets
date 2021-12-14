@@ -4,8 +4,12 @@
  * and open the template in the editor.
  */
 package View;
+import DAO.ExceptionDAO;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 
 /**
@@ -229,7 +233,14 @@ public class GerenciarAnimal extends javax.swing.JPanel {
     }//GEN-LAST:event_BotaoAlterarAnimalMouseMoved
 
     private void BotaoAlterarAnimalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoAlterarAnimalMouseClicked
-        AlterarAnimal alterarAnimal = new AlterarAnimal();
+        AlterarAnimal alterarAnimal = null;
+        try {
+            alterarAnimal = new AlterarAnimal();
+        } catch (ExceptionDAO ex) {
+            Logger.getLogger(GerenciarAnimal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(GerenciarAnimal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         showPanel(alterarAnimal);
     }//GEN-LAST:event_BotaoAlterarAnimalMouseClicked
 

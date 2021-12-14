@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class AnimalDAO {
 
     public void cadastrarAnimal(Animal animal) throws ExceptionDAO {
-        String sql = "INSERT INTO animal(nome, raca, sexo, especie, obs_gerais) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO animal(nome, raca, sexo, especie, obs_gerais, cod_dono) VALUES (?, ?, ?, ?, ?, ?)";
         PreparedStatement pStatement = null;
 
         try {
@@ -21,6 +21,8 @@ public class AnimalDAO {
             pStatement.setString(3, animal.getSexo());
             pStatement.setString(4, animal.getEspecie());
             pStatement.setString(5, animal.getObsGerais());
+            pStatement.setInt(6, animal.getCod_dono());
+            
             pStatement.execute();
         } catch (SQLException e) {
             throw new ExceptionDAO("Erro ao cadastrar animal");

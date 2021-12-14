@@ -20,6 +20,7 @@ public class ConsultarCarteiraSelecioneAnimal extends javax.swing.JPanel {
 
     /**
      * Creates new form ConsultarCarteiraSelecioneAnimal
+     * @throws DAO.ExceptionDAO
      */
     public ConsultarCarteiraSelecioneAnimal() throws ExceptionDAO, SQLException {
         initComponents();
@@ -39,7 +40,7 @@ public class ConsultarCarteiraSelecioneAnimal extends javax.swing.JPanel {
         SubMenu7 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
-        jTextFieldCodigoAnimal = new javax.swing.JTextField();
+        txtCod = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         jScrollPane7 = new javax.swing.JScrollPane();
         jTableTutores5 = new javax.swing.JTable();
@@ -78,7 +79,7 @@ public class ConsultarCarteiraSelecioneAnimal extends javax.swing.JPanel {
             }
         });
 
-        jTextFieldCodigoAnimal.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        txtCod.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
 
         jLabel20.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel20.setText("Código do animal:");
@@ -129,7 +130,7 @@ public class ConsultarCarteiraSelecioneAnimal extends javax.swing.JPanel {
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel20)
-                            .addComponent(jTextFieldCodigoAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(SubMenu7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -143,7 +144,7 @@ public class ConsultarCarteiraSelecioneAnimal extends javax.swing.JPanel {
                 .addGap(45, 45, 45)
                 .addComponent(jLabel20)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextFieldCodigoAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(130, 130, 130))
@@ -170,6 +171,7 @@ public class ConsultarCarteiraSelecioneAnimal extends javax.swing.JPanel {
 
     private void jTableTutores5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTutores5MouseClicked
         // TODO add your handling code here:
+        txtCod.setText((String) jTableTutores5.getValueAt(jTableTutores5.getSelectedRow(), 0));
     }//GEN-LAST:event_jTableTutores5MouseClicked
 
     public void showPanel(JPanel panel){
@@ -208,6 +210,6 @@ public class ConsultarCarteiraSelecioneAnimal extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTable jTableTutores5;
-    private javax.swing.JTextField jTextFieldCodigoAnimal;
+    private javax.swing.JTextField txtCod;
     // End of variables declaration//GEN-END:variables
 }

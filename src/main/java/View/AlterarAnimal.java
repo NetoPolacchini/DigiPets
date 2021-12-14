@@ -1,14 +1,11 @@
 package View;
 
-import Control.AnimalController;
 import DAO.AnimalDAO;
 import DAO.ExceptionDAO;
 import Model.Animal;
-import java.awt.HeadlessException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class AlterarAnimal extends javax.swing.JPanel {
@@ -328,12 +325,9 @@ public class AlterarAnimal extends javax.swing.JPanel {
     private void alterarButtomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alterarButtomActionPerformed
         try {
             alterarAnimal();
-        } catch (ExceptionDAO | SQLException ex) {
+        } catch (ExceptionDAO ex) {
             Logger.getLogger(AlterarAnimal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            loadTable();
-        } catch (ExceptionDAO | SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(AlterarAnimal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_alterarButtomActionPerformed
@@ -358,31 +352,32 @@ public class AlterarAnimal extends javax.swing.JPanel {
     };
     
     public void alterarAnimal() throws ExceptionDAO, SQLException {
-        boolean sucesso;
-        try {
-            AnimalController animalcontroller = new AnimalController();
-
-            String nome = txtNome.getText();
-            String raca = txtRaca.getText();
-            String sexo = buttonGroup1.getSelection().getActionCommand();
-            String especie = txtEspecie.getText();
-            String obs_gerais = txtObsGerais.getText();
        
-            sucesso = AnimalController.alterarAnimal(nome, raca, sexo, especie, obs_gerais);
-
-            if (sucesso == true) {
-
-                JOptionPane.showMessageDialog(null, "Animal atualizado com sucesso");
-            } else if (nome.length() <= 0 || raca.length() <= 0 || especie.length() <= 0 || obs_gerais.length() <= 0) {
-                JOptionPane.showMessageDialog(null, "Preencha todos os campos");
-            } else {
-                JOptionPane.showMessageDialog(null, "Erro ao atualizar Animal");
-            }
-        } catch (ExceptionDAO | HeadlessException ex) {
-            JOptionPane.showMessageDialog(null, "error" + ex);
-        }
+        if(jTableAnimais.getSelectedRow() != -1) {
         
-        loadTable();
+            Animal a = new Animal();
+            AnimalDAO adao = new AnimalDAO();
+            
+            a.setNome(txtNome.getText());
+            a.setRaca(txtRaca.getText());
+            a.setSexo(buttonGroup1.getSelection().getActionCommand());
+            a.setEspecie(txtEspecie.getText());
+            a.setObsGerais(txtObsGerais.getText());
+            a.setCod((int) jTableAnimais.getValueAt(jTableAnimais.getSelectedRow(), 0));
+
+            
+            adao.alterarAnimal(a);
+            
+            txtNome.setText("");
+            txtEspecie.setText("");
+            txtRaca.setText("");
+            txtObsGerais.setText("");
+            buttonGroup1.setSelected(null, false);
+            
+            loadTable();
+            
+        }
+  
     }
     
     

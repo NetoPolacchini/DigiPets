@@ -4,8 +4,15 @@
  * and open the template in the editor.
  */
 package View;
+import DAO.ExceptionDAO;
+import DAO.TutorDAO;
+import Model.Tutor;
 import java.awt.BorderLayout;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,8 +23,9 @@ public class ConsultarCarteiraSelecioneTutor extends javax.swing.JPanel {
     /**
      * Creates new form ConsultarCarteiraSelecioneTutor
      */
-    public ConsultarCarteiraSelecioneTutor() {
+    public ConsultarCarteiraSelecioneTutor() throws ExceptionDAO, SQLException {
         initComponents();
+        loadTable();
     }
 
     /**
@@ -150,7 +158,14 @@ public class ConsultarCarteiraSelecioneTutor extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        ConsultarCarteiraSelecioneAnimal consultarCarteiraSelecioneAnimal = new ConsultarCarteiraSelecioneAnimal();
+        ConsultarCarteiraSelecioneAnimal consultarCarteiraSelecioneAnimal = null;
+        try {
+            consultarCarteiraSelecioneAnimal = new ConsultarCarteiraSelecioneAnimal();
+        } catch (ExceptionDAO ex) {
+            Logger.getLogger(ConsultarCarteiraSelecioneTutor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultarCarteiraSelecioneTutor.class.getName()).log(Level.SEVERE, null, ex);
+        }
         showPanel(consultarCarteiraSelecioneAnimal);
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -167,6 +182,24 @@ public class ConsultarCarteiraSelecioneTutor extends javax.swing.JPanel {
         this.revalidate();
         this.repaint();
     }
+    
+    private void loadTable() throws ExceptionDAO, SQLException{
+        DefaultTableModel modelo = (DefaultTableModel)jTableTutores5.getModel();
+        modelo.setNumRows(0);
+        
+        TutorDAO tdao = new TutorDAO();
+        
+        for(Tutor t: tdao.listarTutor()){
+            
+            modelo.addRow(new Object[]{
+                t.getCod_tutor(),
+                t.getCpf(),
+                t.getNome()
+            });
+            
+        }
+        
+    };
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel SubMenu5;
