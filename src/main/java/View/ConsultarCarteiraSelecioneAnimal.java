@@ -4,8 +4,13 @@
  * and open the template in the editor.
  */
 package View;
+import DAO.AnimalDAO;
+import DAO.ExceptionDAO;
+import Model.Animal;
 import java.awt.BorderLayout;
+import java.sql.SQLException;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,8 +21,9 @@ public class ConsultarCarteiraSelecioneAnimal extends javax.swing.JPanel {
     /**
      * Creates new form ConsultarCarteiraSelecioneAnimal
      */
-    public ConsultarCarteiraSelecioneAnimal() {
+    public ConsultarCarteiraSelecioneAnimal() throws ExceptionDAO, SQLException {
         initComponents();
+        loadTable();
     }
 
     /**
@@ -93,7 +99,15 @@ public class ConsultarCarteiraSelecioneAnimal extends javax.swing.JPanel {
             new String [] {
                 "Código", "Nome", "Espécie"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTableTutores5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableTutores5MouseClicked(evt);
@@ -167,20 +181,30 @@ public class ConsultarCarteiraSelecioneAnimal extends javax.swing.JPanel {
         this.revalidate();
         this.repaint();
     }
+    
+    private void loadTable() throws ExceptionDAO, SQLException{
+        DefaultTableModel modelo = (DefaultTableModel)jTableTutores5.getModel();
+        modelo.setNumRows(0);
+        
+        AnimalDAO adao = new AnimalDAO();
+        
+        for(Animal a: adao.listarAnimal()){
+            
+            modelo.addRow(new Object[]{
+                a.getCod(),
+                a.getNome(),
+                a.getEspecie()
+            });
+            
+        }
+        
+    };
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel SubMenu5;
-    private javax.swing.JPanel SubMenu6;
     private javax.swing.JPanel SubMenu7;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTable jTableTutores5;

@@ -230,7 +230,7 @@ public class CadastrarAnimal extends javax.swing.JPanel {
             String raca = jTextFieldRacaAnimal.getText();
             String especie = jTextFieldEpecieAnimal.getText();
             String obs_gerais = jTextFieldObsGeraisAnimal.getText();
-           // Boolean sexo = buttonGroup1.getSelection();
+            String sexo = buttonGroup1.getSelection().getActionCommand();
             
             sucesso = AnimalController.cadastrarAnimal(nome, raca, sexo, especie, obs_gerais);
 
@@ -247,6 +247,7 @@ public class CadastrarAnimal extends javax.swing.JPanel {
         }
     }
 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel SubMenu;
     private javax.swing.ButtonGroup buttonGroup1;

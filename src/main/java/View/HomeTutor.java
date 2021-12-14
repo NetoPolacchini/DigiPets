@@ -5,8 +5,12 @@
  */
 package View;
 
+import DAO.ExceptionDAO;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 
 
@@ -204,7 +208,14 @@ public class HomeTutor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotaoConsultarCarteiraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoConsultarCarteiraMouseClicked
-        ConsultarCarteiraSelecioneAnimal consultarCarteiraSelecioneAnimal = new ConsultarCarteiraSelecioneAnimal();
+        ConsultarCarteiraSelecioneAnimal consultarCarteiraSelecioneAnimal = null;
+        try {
+            consultarCarteiraSelecioneAnimal = new ConsultarCarteiraSelecioneAnimal();
+        } catch (ExceptionDAO ex) {
+            Logger.getLogger(HomeTutor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(HomeTutor.class.getName()).log(Level.SEVERE, null, ex);
+        }
         showPanel(consultarCarteiraSelecioneAnimal);
     }//GEN-LAST:event_BotaoConsultarCarteiraMouseClicked
 

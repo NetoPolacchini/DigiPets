@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class AnimalDAO {
 
     public void cadastrarAnimal(Animal animal) throws ExceptionDAO {
-        String sql = "INSERT INTO animal(nome, raca, sexo, especie, obs_gerais)";
+        String sql = "INSERT INTO animal(nome, raca, sexo, especie, obs_gerais) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement pStatement = null;
 
         try {
@@ -18,7 +18,7 @@ public class AnimalDAO {
             pStatement = ConnectionMVC.getConnection().prepareStatement(sql);
             pStatement.setString(1, animal.getNome());
             pStatement.setString(2, animal.getRaca());
-            pStatement.setBoolean(3, animal.getSexo());
+            pStatement.setString(3, animal.getSexo());
             pStatement.setString(4, animal.getEspecie());
             pStatement.setString(5, animal.getObsGerais());
             pStatement.execute();
@@ -49,7 +49,7 @@ public class AnimalDAO {
             pStatement = ConnectionMVC.getConnection().prepareStatement(sql);
             pStatement.setString(1, animal.getNome());
             pStatement.setString(2, animal.getRaca());
-            pStatement.setBoolean(3, animal.getSexo());
+            pStatement.setString(3, animal.getSexo());
             pStatement.setString(4, animal.getEspecie());
             pStatement.setString(5, animal.getObsGerais());
             pStatement.setInt(6, animal.getCod());
@@ -101,9 +101,9 @@ public class AnimalDAO {
     }
     
     public ArrayList<Animal> listarAnimal() throws ExceptionDAO, SQLException {
-        String sql = " select * from animal";
+        String sql = " SELECT * FROM animal";
         PreparedStatement pStatement = null;
-        ArrayList<Animal> animal = null;
+        ArrayList<Animal> animais = null;
 
         try {
             pStatement = ConnectionMVC.getConnection().prepareStatement(sql);
@@ -111,7 +111,7 @@ public class AnimalDAO {
 
             if (rs != null) {
                 
-                animal = new ArrayList<Animal>();
+                animais = new ArrayList<Animal>();
                 
                 while (rs.next()) {
                     
@@ -120,10 +120,10 @@ public class AnimalDAO {
                     anima.setCod(rs.getInt("cod"));
                     anima.setNome(rs.getString("nome"));
                     anima.setRaca(rs.getString("raca"));
-                    anima.setSexo(rs.getBoolean("sexo"));
+                    anima.setSexo(rs.getString("sexo"));
                     anima.setEspecie(rs.getString("especie"));
                     anima.setObsGerais(rs.getString("obsGerais"));
-                    animal.add(anima);
+                    animais.add(anima);
                 }
             }
         } catch (SQLException e) {
@@ -145,7 +145,7 @@ public class AnimalDAO {
             throw new ExceptionDAO("Erro ao fechar conexão" + e);
         }
 
-        return animal;
+        return animais;
 
     }
 }

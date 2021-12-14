@@ -8,15 +8,19 @@ import java.util.Date;
 
 public class Animal {
 
+    public static void alterarAnimal(Animal animal) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     
     private int cod;
     private String nome;
     private String raca;
-    private Boolean sexo;
+    private String sexo;
     private String especie;
     private String obsGerais;
 
-    public Animal(String nome, String raca, Boolean sexo, String especie, String obsGerais) {
+    public Animal(String nome, String raca, String sexo, String especie, String obsGerais) {
 
         this.nome = nome;
         this.raca = raca;
@@ -52,11 +56,11 @@ public class Animal {
         this.raca = raca;
     }
 
-    public Boolean getSexo() {
+    public String getSexo() {
         return sexo;
     }
 
-    public void setSexo(Boolean sexo) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 
