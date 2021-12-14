@@ -39,7 +39,67 @@ public class AnimalDAO {
             }
         }
     }
+    
+    public void alterarAnimal(Animal animal) throws ExceptionDAO{
+        String sql = "UPDATE animal SET nome=?, raca=?, sexo=?, especie=?, obs_gerais=? WHERE cod=?";
+        PreparedStatement pStatement = null;
 
+        try {
+
+            pStatement = ConnectionMVC.getConnection().prepareStatement(sql);
+            pStatement.setString(1, animal.getNome());
+            pStatement.setString(2, animal.getRaca());
+            pStatement.setBoolean(3, animal.getSexo());
+            pStatement.setString(4, animal.getEspecie());
+            pStatement.setString(5, animal.getObsGerais());
+            pStatement.setInt(6, animal.getCod());
+            pStatement.execute();
+            
+        } catch (SQLException e) {
+            throw new ExceptionDAO("Erro ao alterar dados de animal");
+        } finally {
+            try {
+                if (pStatement != null) {
+                    pStatement.close();
+                }
+            } catch (SQLException e) {
+                throw new ExceptionDAO("Erro ao fechar statement " + e);
+            }
+            try {
+                ConnectionMVC.getConnection().close();
+            } catch (SQLException e) {
+                throw new ExceptionDAO("Erro ao fechar conexão " + e);
+            }
+        }
+    }
+    
+    public void removerAnimal(Animal animal) throws ExceptionDAO{
+        String sql = "DELETE FROM animal WHERE idAnimal=?";
+        PreparedStatement pStatement = null;
+
+        try {
+
+            pStatement = ConnectionMVC.getConnection().prepareStatement(sql);
+            pStatement.setInt(1, animal.getCod());
+            pStatement.execute();
+        } catch (SQLException e) {
+            throw new ExceptionDAO("Erro ao remover animal");
+        } finally {
+            try {
+                if (pStatement != null) {
+                    pStatement.close();
+                }
+            } catch (SQLException e) {
+                throw new ExceptionDAO("Erro ao fechar statement " + e);
+            }
+            try {
+                ConnectionMVC.getConnection().close();
+            } catch (SQLException e) {
+                throw new ExceptionDAO("Erro ao fechar conexão " + e);
+            }
+        }
+    }
+    
     public ArrayList<Animal> listarAnimal() throws ExceptionDAO, SQLException {
         String sql = " select * from animal";
         PreparedStatement pStatement = null;
@@ -89,3 +149,5 @@ public class AnimalDAO {
 
     }
 }
+
+   

@@ -38,6 +38,35 @@ public class VacinaDAO {
         }
     }
 
+    public void alterarVacina(Vacina vacina) throws ExceptionDAO, SQLException {
+        String sql = "UPDATE animal(nome, cod, data)";
+        PreparedStatement pStatement = null;
+
+        try {
+
+            pStatement = ConnectionMVC.getConnection().prepareStatement(sql);
+            pStatement.setString(1, vacina.getNome_vacina());
+            pStatement.setInt(2, vacina.getCod_vacina());
+            pStatement.setDate(3, (Date) vacina.getData_aplic_vacina());
+            pStatement.execute();
+        } catch (SQLException e) {
+            throw new ExceptionDAO("Erro ao cadastrar vacina");
+        } finally {
+            try {
+                if (pStatement != null) {
+                    pStatement.close();
+                }
+            } catch (SQLException e) {
+                throw new ExceptionDAO("Erro ao fechar statement " + e);
+            }
+            try {
+                ConnectionMVC.getConnection().close();
+            } catch (SQLException e) {
+                throw new ExceptionDAO("Erro ao fechar conexão " + e);
+            }
+        }
+    }
+    
     public ArrayList<Vacina> listarVacina() throws ExceptionDAO, SQLException {
         String sql = " select * from vacina";
         PreparedStatement pStatement = null;

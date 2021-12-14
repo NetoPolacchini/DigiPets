@@ -7,6 +7,7 @@ public class Carteira {
     
     private Vacina vacina;
     private Animal animal;
+    private int cod;
 
     public Carteira(Vacina vacina, Animal animal) {
         this.vacina = vacina;
@@ -31,6 +32,16 @@ public class Carteira {
     public void setAnimal(Animal animal) {
         this.animal = animal;
     }
+
+    public int getCod() {
+        return cod;
+    }
+
+    public void setCod(int cod) {
+        this.cod = cod;
+    }
+    
+    
     
     public static void cadastrarCarteira(Carteira carteira) throws ExceptionDAO {
         new CarteiraDAO().cadastrarCarteira(carteira);

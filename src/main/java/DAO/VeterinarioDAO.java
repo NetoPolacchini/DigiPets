@@ -40,6 +40,62 @@ public class VeterinarioDAO {
         }
     }
 
+    public void alterarVeterinario(Veterinario veterinario) throws ExceptionDAO, SQLException {
+        String sql = "UPDATE veterinario SET nome=?, cpf=?, crm=?";
+        PreparedStatement pStatement = null;
+
+        try {
+
+            pStatement = ConnectionMVC.getConnection().prepareStatement(sql);
+            pStatement.setString(1, veterinario.getNome());
+            pStatement.setString(2, veterinario.getCpf());
+            pStatement.setString(3, veterinario.getCrm());
+            pStatement.execute();
+        } catch (SQLException e) {
+            throw new ExceptionDAO("Erro ao alterar veterinario");
+        } finally {
+            try {
+                if (pStatement != null) {
+                    pStatement.close();
+                }
+            } catch (SQLException e) {
+                throw new ExceptionDAO("Erro ao fechar statement " + e);
+            }
+            try {
+                ConnectionMVC.getConnection().close();
+            } catch (SQLException e) {
+                throw new ExceptionDAO("Erro ao fechar conexão " + e);
+            }
+        }
+    }
+    
+    public void removerVeterinario(Veterinario veterinario) throws ExceptionDAO, SQLException {
+        String sql = "DELETE veterinario WHERE crm=?";
+        PreparedStatement pStatement = null;
+
+        try {
+
+            pStatement = ConnectionMVC.getConnection().prepareStatement(sql);
+            pStatement.setString(1, veterinario.getCrm());
+            pStatement.execute();
+        } catch (SQLException e) {
+            throw new ExceptionDAO("Erro ao apagar veterinario");
+        } finally {
+            try {
+                if (pStatement != null) {
+                    pStatement.close();
+                }
+            } catch (SQLException e) {
+                throw new ExceptionDAO("Erro ao fechar statement " + e);
+            }
+            try {
+                ConnectionMVC.getConnection().close();
+            } catch (SQLException e) {
+                throw new ExceptionDAO("Erro ao fechar conexão " + e);
+            }
+        }
+    }
+    
     public ArrayList<Veterinario> listarVeterinario() throws ExceptionDAO, SQLException {
         String sql = " select * from animal";
         PreparedStatement pStatement = null;

@@ -218,7 +218,7 @@ public class CadastrarAnimal extends javax.swing.JPanel {
     }//GEN-LAST:event_jRadioButtonFemeaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        CadastrarAnimal();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public void CadastrarAnimal() {
@@ -230,9 +230,8 @@ public class CadastrarAnimal extends javax.swing.JPanel {
             String raca = jTextFieldRacaAnimal.getText();
             String especie = jTextFieldEpecieAnimal.getText();
             String obs_gerais = jTextFieldObsGeraisAnimal.getText();
-            Boolean sexo = buttonGroup1.getSelection();
+           // Boolean sexo = buttonGroup1.getSelection();
             
-//            Boolean sexo = jTextFieldCpfTutor.getText() ;
             sucesso = AnimalController.cadastrarAnimal(nome, raca, sexo, especie, obs_gerais);
 
             if (sucesso == true) {

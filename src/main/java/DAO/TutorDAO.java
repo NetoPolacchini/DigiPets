@@ -38,6 +38,65 @@ public class TutorDAO {
         }
     }
 
+    public void alterarTutor(Tutor tutor) throws ExceptionDAO, SQLException {
+        String sql = "UPDATE tutor SET nome=?, cpf=? WHERE cod=?";
+        PreparedStatement pStatement = null;
+
+        try {
+
+            pStatement = ConnectionMVC.getConnection().prepareStatement(sql);
+            pStatement.setString(1, tutor.getNome());
+            pStatement.setString(2, tutor.getCpf());
+            pStatement.setInt(3, tutor.getCod_tutor());
+            
+            pStatement.execute();
+        } catch (SQLException e) {
+            throw new ExceptionDAO("Erro ao alterrar tutor");
+        } finally {
+            try {
+                if (pStatement != null) {
+                    pStatement.close();
+                }
+            } catch (SQLException e) {
+                throw new ExceptionDAO("Erro ao fechar statement " + e);
+            }
+            try {
+                ConnectionMVC.getConnection().close();
+            } catch (SQLException e) {
+                throw new ExceptionDAO("Erro ao fechar conexão " + e);
+            }
+        }
+    }
+    
+   public void removerTutor(Tutor tutor) throws ExceptionDAO, SQLException {
+        String sql = "DELETE tutor WHERE cod=?";
+        PreparedStatement pStatement = null;
+
+        try {
+
+            pStatement = ConnectionMVC.getConnection().prepareStatement(sql);
+            
+            pStatement.setInt(1, tutor.getCod_tutor());
+            
+            pStatement.execute();
+        } catch (SQLException e) {
+            throw new ExceptionDAO("Erro ao deletar tutor");
+        } finally {
+            try {
+                if (pStatement != null) {
+                    pStatement.close();
+                }
+            } catch (SQLException e) {
+                throw new ExceptionDAO("Erro ao fechar statement " + e);
+            }
+            try {
+                ConnectionMVC.getConnection().close();
+            } catch (SQLException e) {
+                throw new ExceptionDAO("Erro ao fechar conexão " + e);
+            }
+        }
+    }
+    
     public ArrayList<Tutor> listarTutor() throws ExceptionDAO, SQLException {
         String sql = " select * from tutor";
         PreparedStatement pStatement = null;

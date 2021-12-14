@@ -38,4 +38,61 @@ public class CarteiraDAO {
         }
     }
 
+    public void alterarCarteira(Carteira carteira) throws ExceptionDAO {
+        String sql = "UPDATE carteira SET nome_animal=?, nome_vacina=? WHERE cod=?";
+        PreparedStatement pStatement = null;
+
+        try {
+
+            pStatement = ConnectionMVC.getConnection().prepareStatement(sql);
+            pStatement.setString(1, carteira.getVacina().getNome_vacina());
+            pStatement.setString(2, carteira.getAnimal().getNome());
+            pStatement.setInt(3, carteira.getCod());
+            pStatement.execute();
+        } catch (SQLException e) {
+            throw new ExceptionDAO("Erro ao alterar carteira");
+        } finally {
+            try {
+                if (pStatement != null) {
+                    pStatement.close();
+                }
+            } catch (SQLException e) {
+                throw new ExceptionDAO("Erro ao fechar statement " + e);
+            }
+            try {
+                ConnectionMVC.getConnection().close();
+            } catch (SQLException e) {
+                throw new ExceptionDAO("Erro ao fechar conexão " + e);
+            }
+        }
+    }
+
+    public void removerCarteira(Carteira carteira) throws ExceptionDAO {
+        String sql = "DELETE carteira WHERE cod=?";
+        PreparedStatement pStatement = null;
+
+        try {
+
+            pStatement = ConnectionMVC.getConnection().prepareStatement(sql);
+            pStatement.setInt(1, carteira.getCod());
+            pStatement.execute();
+        } catch (SQLException e) {
+            throw new ExceptionDAO("Erro ao apagar carteira");
+        } finally {
+            try {
+                if (pStatement != null) {
+                    pStatement.close();
+                }
+            } catch (SQLException e) {
+                throw new ExceptionDAO("Erro ao fechar statement " + e);
+            }
+            try {
+                ConnectionMVC.getConnection().close();
+            } catch (SQLException e) {
+                throw new ExceptionDAO("Erro ao fechar conexão " + e);
+            }
+        }
+    }
+    
+    
 }
