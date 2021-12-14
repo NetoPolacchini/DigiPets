@@ -62,7 +62,7 @@ public class TutorDAO {
                 }
             }
         } catch (SQLException e) {
-            throw new ExceptionDAO("Erro ao consultar item");
+            throw new ExceptionDAO("Erro ao consultar tutor");
         } finally {
             try {
                 if (pStatement != null) {

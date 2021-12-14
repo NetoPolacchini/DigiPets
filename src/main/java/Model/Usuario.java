@@ -9,11 +9,10 @@ public class Usuario {
     private String senha;
     private String tipo_usuario;
 
-    public Usuario(String nome, String cpf, String senha, String tipo_usuario) {
+    public Usuario(String nome, String cpf, String senha) {
         this.nome = nome;
         this.cpf = cpf;
         this.senha = senha;
-        this.tipo_usuario = tipo_usuario;
     }
     
     public Usuario(){}

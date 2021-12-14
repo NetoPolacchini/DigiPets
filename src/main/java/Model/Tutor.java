@@ -10,9 +10,8 @@ public class Tutor extends Usuario {
     
     private int cod_tutor;
 
-    public Tutor(int cod_tutor, String nome, String cpf, String senha, String tipo_usuario) {
-        super(nome, cpf, senha, tipo_usuario);
-        this.cod_tutor = cod_tutor;
+    public Tutor(String nome, String cpf, String senha) {
+        super(nome, cpf, senha);
     }   
 
     public Tutor(){}

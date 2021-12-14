@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 package View;
+
+import Control.AnimalController;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author joao_
@@ -91,6 +95,11 @@ public class CadastrarAnimal extends javax.swing.JPanel {
         jButton1.setBackground(new java.awt.Color(79, 171, 201));
         jButton1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jButton1.setText("Cadastrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jTextFieldObsGeraisAnimal.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
 
@@ -208,6 +217,36 @@ public class CadastrarAnimal extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButtonFemeaActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public void CadastrarAnimal() {
+        boolean sucesso;
+        try {
+            AnimalController animalcontroller = new AnimalController();
+
+            String nome = jTextFieldNomeAnimal.getText();
+            String raca = jTextFieldRacaAnimal.getText();
+            String especie = jTextFieldEpecieAnimal.getText();
+            String obs_gerais = jTextFieldObsGeraisAnimal.getText();
+            Boolean sexo = buttonGroup1.getSelection();
+            
+//            Boolean sexo = jTextFieldCpfTutor.getText() ;
+            sucesso = AnimalController.cadastrarAnimal(nome, raca, sexo, especie, obs_gerais);
+
+            if (sucesso == true) {
+
+                JOptionPane.showMessageDialog(null, "Animal cadastrado com sucesso");
+            } else if (nome.length() <= 0 || raca.length() <= 0 || especie.length() <= 0 || obs_gerais.length() <= 0) {
+                JOptionPane.showMessageDialog(null, "Preencha todos os campos");
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro ao cadastrar Animal");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "error" + ex);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel SubMenu;

@@ -11,8 +11,9 @@ public class Veterinario extends Usuario {
     
     private String crm;
 
-    public Veterinario(String nome, String cpf, String senha, String tipo_usuario, String crm) {
-        super(nome, cpf, senha, tipo_usuario);
+    public Veterinario(String nome, String cpf, String senha, String crm) {
+        super(nome, cpf, senha);
+        this.crm = crm;
     }
     
     public Veterinario(){}

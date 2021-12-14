@@ -4,8 +4,17 @@
  * and open the template in the editor.
  */
 package View;
+import Control.TutorController;
+import DAO.ExceptionDAO;
+import Model.Tutor;
 import java.awt.BorderLayout;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -124,9 +133,9 @@ public class GerenciarVacinaSelecioneTutor extends javax.swing.JPanel {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(SubMenu5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
+                .addGap(38, 38, 38)
                 .addComponent(jLabel18)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextFieldCodigoTutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -155,9 +164,35 @@ public class GerenciarVacinaSelecioneTutor extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jTableTutores5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTutores5MouseClicked
-        // TODO add your handling code here:
+        try {
+            listarTutor();
+        } catch (ExceptionDAO ex) {
+            Logger.getLogger(GerenciarVacinaSelecioneTutor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(GerenciarVacinaSelecioneTutor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_jTableTutores5MouseClicked
 
+  public void listarTutor() throws ExceptionDAO, SQLException {
+      DefaultTableModel tableModel = (DefaultTableModel) jTableTutores5.getModel();
+        tableModel.setRowCount(0);
+        TutorController tutorController = new TutorController();
+         
+         ArrayList<Tutor> itens = tutorController.listarTutor();
+         itens.forEach((Tutor tutor) -> {
+                tableModel.addRow(new Object[] { tutor.getCod_tutor(), tutor.getCpf(), tutor.getNome()});
+            });
+         
+         
+         jTableTutores5.setModel(tableModel);
+    
+  }
+        
+
+    
+    
+    
     public void showPanel(JPanel panel){
         panel.setSize(750,740);
         panel.setLocation(0, 0);
