@@ -23,7 +23,7 @@ public class ConsultarCarteiraSelecioneTutor extends javax.swing.JPanel {
     /**
      * Creates new form ConsultarCarteiraSelecioneTutor
      */
-    public ConsultarCarteiraSelecioneTutor() {
+    public ConsultarCarteiraSelecioneTutor()  {
         initComponents();
         try {
             loadTable();
@@ -164,7 +164,7 @@ public class ConsultarCarteiraSelecioneTutor extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        ConsultarCarteiraSelecioneAnimal consultarCarteiraSelecioneAnimal = ConsultarCarteiraSelecioneAnimal();
+        ConsultarCarteiraSelecioneAnimal consultarCarteiraSelecioneAnimal = new ConsultarCarteiraSelecioneAnimal();
         showPanel(consultarCarteiraSelecioneAnimal);
     }//GEN-LAST:event_jButton6ActionPerformed
 

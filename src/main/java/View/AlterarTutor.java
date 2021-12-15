@@ -24,9 +24,15 @@ public class AlterarTutor extends javax.swing.JPanel {
      * @throws DAO.ExceptionDAO
      * @throws java.sql.SQLException
      */
-    public AlterarTutor() throws ExceptionDAO, SQLException {
+    public AlterarTutor() {
         initComponents();
-        loadTable();
+        try {
+            loadTable();
+        } catch (ExceptionDAO ex) {
+            Logger.getLogger(AlterarTutor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AlterarTutor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

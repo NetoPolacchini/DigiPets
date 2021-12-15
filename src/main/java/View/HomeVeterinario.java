@@ -293,7 +293,7 @@ public class HomeVeterinario extends javax.swing.JFrame {
     }//GEN-LAST:event_BotaoGerenciarUsuarioMouseClicked
 
     private void BotaoConsultarCarteiraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoConsultarCarteiraMouseClicked
-        ConsultarCarteiraSelecioneTutor consultarCarteiraSelecioneTutor = ConsultarCarteiraSelecioneTutor() ;
+        ConsultarCarteiraSelecioneTutor consultarCarteiraSelecioneTutor = new ConsultarCarteiraSelecioneTutor() ;
         showPanel(consultarCarteiraSelecioneTutor);
     }//GEN-LAST:event_BotaoConsultarCarteiraMouseClicked
 

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class AnimalDAO {
 
     public void cadastrarAnimal(Animal animal) throws ExceptionDAO {
-        String sql = "INSERT INTO animal(nome, raca, sexo, especie, obs_gerais, cod_dono) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO animal(nome, raca, sexo, especie, obsGerais, idTutorAnimal) VALUES (?, ?, ?, ?, ?, ?)";
         PreparedStatement pStatement = null;
 
         try {
@@ -43,7 +43,7 @@ public class AnimalDAO {
     }
     
     public void alterarAnimal(Animal animal) throws ExceptionDAO{
-        String sql = "UPDATE animal SET nome=?, raca=?, sexo=?, especie=?, obs_gerais=? WHERE cod=?";
+        String sql = "UPDATE animal SET nome=?, raca=?, sexo=?, especie=?, obsGerais=? WHERE idAnimal=?";
         PreparedStatement pStatement = null;
 
         try {

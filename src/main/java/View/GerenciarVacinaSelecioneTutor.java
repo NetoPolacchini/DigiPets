@@ -28,7 +28,13 @@ public class GerenciarVacinaSelecioneTutor extends javax.swing.JPanel {
      */
     public GerenciarVacinaSelecioneTutor() {
         initComponents();
-        
+        try {
+            loadTable();
+        } catch (ExceptionDAO ex) {
+            Logger.getLogger(GerenciarVacinaSelecioneTutor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(GerenciarVacinaSelecioneTutor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

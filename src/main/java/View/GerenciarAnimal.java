@@ -1,10 +1,6 @@
 package View;
-import DAO.ExceptionDAO;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JPanel;
 
 
@@ -225,7 +221,7 @@ public class GerenciarAnimal extends javax.swing.JPanel {
     }//GEN-LAST:event_BotaoAlterarAnimalMouseMoved
 
     private void BotaoAlterarAnimalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoAlterarAnimalMouseClicked
-        AlterarAnimal alterarAnimal = AlterarAnimal();
+        AlterarAnimal alterarAnimal = new AlterarAnimal();
         showPanel(alterarAnimal);
     }//GEN-LAST:event_BotaoAlterarAnimalMouseClicked
 

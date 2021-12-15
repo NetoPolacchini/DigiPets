@@ -167,14 +167,7 @@ public class GerenciarUsuario extends javax.swing.JPanel {
     }//GEN-LAST:event_BotaoGerenciarTutorMouseClicked
 
     private void BotaoGerenciarAnimalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoGerenciarAnimalMouseClicked
-        GerenciarAnimalSelecioneTutor gerenciarAnimalSelecioneTutor = null;
-        try {
-            gerenciarAnimalSelecioneTutor = new GerenciarAnimalSelecioneTutor();
-        } catch (ExceptionDAO ex) {
-            Logger.getLogger(GerenciarUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(GerenciarUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        GerenciarAnimalSelecioneTutor gerenciarAnimalSelecioneTutor = new GerenciarAnimalSelecioneTutor();
         showPanel(gerenciarAnimalSelecioneTutor);
     }//GEN-LAST:event_BotaoGerenciarAnimalMouseClicked
 

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class VeterinarioDAO {
 
     public void cadastrarVeterinario(Veterinario veterinario) throws ExceptionDAO, SQLException {
-        String sql = "INSERT INTO veterinario(nome, cpf, senha, tipo_usuario, crm)";
+        String sql = "INSERT INTO veterinario(nome, cpf, senha, crm)";
         PreparedStatement pStatement = null;
 
         try {
@@ -19,8 +19,7 @@ public class VeterinarioDAO {
             pStatement.setString(1, veterinario.getNome());
             pStatement.setString(2, veterinario.getCpf());
             pStatement.setString(3, veterinario.getSenha());
-            pStatement.setString(4, veterinario.getTipo_usuario());
-            pStatement.setString(5, veterinario.getCrm());
+            pStatement.setString(4, veterinario.getCrm());
             pStatement.execute();
         } catch (SQLException e) {
             throw new ExceptionDAO("Erro ao cadastrar veterinario");
@@ -116,7 +115,6 @@ public class VeterinarioDAO {
                     vet.setNome(rs.getString("nome"));
                     vet.setCpf(rs.getString("cpf"));
                     vet.setSenha(rs.getString("senha"));
-                    vet.setTipo_usuario(rs.getString("tipo_usuario"));
                     vet.setCrm(rs.getString("crm"));
                     veterinario.add(vet);
                 }

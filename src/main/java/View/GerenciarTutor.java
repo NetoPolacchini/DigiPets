@@ -221,14 +221,7 @@ public class GerenciarTutor extends javax.swing.JPanel {
     }//GEN-LAST:event_BotaoCadastrarTutorMouseClicked
 
     private void BotaoAlterarTutorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoAlterarTutorMouseClicked
-        AlterarTutor alterarTutor = null;
-        try {
-            alterarTutor = new AlterarTutor();
-        } catch (ExceptionDAO ex) {
-            Logger.getLogger(GerenciarTutor.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(GerenciarTutor.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        AlterarTutor alterarTutor = new AlterarTutor();
         showPanel(alterarTutor);
     }//GEN-LAST:event_BotaoAlterarTutorMouseClicked
 

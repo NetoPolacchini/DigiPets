@@ -7,7 +7,6 @@ public class Usuario {
     private String nome;
     private String cpf;
     private String senha;
-    private String tipo_usuario;
 
     public Usuario(String nome, String cpf, String senha) {
         this.nome = nome;
@@ -41,17 +40,4 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-
-    public String getTipo_usuario() {
-        return tipo_usuario;
-    }
-
-    public void setTipo_usuario(String tipo_usuario) {
-        this.tipo_usuario = tipo_usuario;
-    }
-    
-    
-    
-    
-            
 }

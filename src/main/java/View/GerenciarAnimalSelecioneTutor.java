@@ -9,6 +9,8 @@ import DAO.TutorDAO;
 import Model.Tutor;
 import java.awt.BorderLayout;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,9 +23,15 @@ public class GerenciarAnimalSelecioneTutor extends javax.swing.JPanel {
     /**
      * Creates new form GerenciarAnimalSelecioneTutor
      */
-    public GerenciarAnimalSelecioneTutor() throws ExceptionDAO, SQLException {
+    public GerenciarAnimalSelecioneTutor() {
         initComponents();
-        loadTable();
+        try {
+            loadTable();
+        } catch (ExceptionDAO ex) {
+            Logger.getLogger(GerenciarAnimalSelecioneTutor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(GerenciarAnimalSelecioneTutor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
