@@ -9,6 +9,8 @@ import DAO.ExceptionDAO;
 import Model.Animal;
 import java.awt.BorderLayout;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,9 +24,15 @@ public class ConsultarCarteiraSelecioneAnimal extends javax.swing.JPanel {
      * Creates new form ConsultarCarteiraSelecioneAnimal
      * @throws DAO.ExceptionDAO
      */
-    public ConsultarCarteiraSelecioneAnimal() throws ExceptionDAO, SQLException {
-        initComponents();
-        loadTable();
+    public ConsultarCarteiraSelecioneAnimal() {
+        try {
+            initComponents();
+            loadTable();
+        } catch (ExceptionDAO ex) {
+            Logger.getLogger(ConsultarCarteiraSelecioneAnimal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultarCarteiraSelecioneAnimal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

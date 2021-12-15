@@ -11,11 +11,15 @@ import javax.swing.table.DefaultTableModel;
 public class AlterarAnimal extends javax.swing.JPanel {
 
     
-    public AlterarAnimal() throws ExceptionDAO, SQLException {
+    public AlterarAnimal() {
         initComponents();
-        DefaultTableModel tabela = (DefaultTableModel) jTableAnimais.getModel();
-        
-        loadTable();
+        try {
+            loadTable();
+        } catch (ExceptionDAO ex) {
+            Logger.getLogger(AlterarAnimal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AlterarAnimal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     
@@ -340,9 +344,7 @@ public class AlterarAnimal extends javax.swing.JPanel {
                 a.getRaca(),
                 a.getEspecie()
             });
-            
         }
-        
     };
     
     public void alterarAnimal() throws ExceptionDAO, SQLException {

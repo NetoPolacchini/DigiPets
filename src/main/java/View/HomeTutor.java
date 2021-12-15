@@ -209,15 +209,9 @@ public class HomeTutor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotaoConsultarCarteiraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoConsultarCarteiraMouseClicked
-        try {
-            ConsultarCarteiraSelecioneAnimal consultarCarteiraSelecioneAnimal = new ConsultarCarteiraSelecioneAnimal();
-            showPanel(consultarCarteiraSelecioneAnimal);
-        } catch (ExceptionDAO ex) {
-            Logger.getLogger(HomeTutor.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(HomeTutor.class.getName()).log(Level.SEVERE, null, ex);
-        }
         
+        ConsultarCarteiraSelecioneAnimal consultarCarteiraSelecioneAnimal = new ConsultarCarteiraSelecioneAnimal();
+        showPanel(consultarCarteiraSelecioneAnimal);
 
     }//GEN-LAST:event_BotaoConsultarCarteiraMouseClicked
 

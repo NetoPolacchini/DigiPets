@@ -233,14 +233,7 @@ public class GerenciarAnimal extends javax.swing.JPanel {
     }//GEN-LAST:event_BotaoAlterarAnimalMouseMoved
 
     private void BotaoAlterarAnimalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoAlterarAnimalMouseClicked
-        AlterarAnimal alterarAnimal = null;
-        try {
-            alterarAnimal = new AlterarAnimal();
-        } catch (ExceptionDAO ex) {
-            Logger.getLogger(GerenciarAnimal.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(GerenciarAnimal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        AlterarAnimal alterarAnimal = AlterarAnimal();
         showPanel(alterarAnimal);
     }//GEN-LAST:event_BotaoAlterarAnimalMouseClicked
 

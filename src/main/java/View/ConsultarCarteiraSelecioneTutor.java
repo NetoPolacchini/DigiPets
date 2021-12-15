@@ -23,9 +23,15 @@ public class ConsultarCarteiraSelecioneTutor extends javax.swing.JPanel {
     /**
      * Creates new form ConsultarCarteiraSelecioneTutor
      */
-    public ConsultarCarteiraSelecioneTutor() throws ExceptionDAO, SQLException {
+    public ConsultarCarteiraSelecioneTutor() {
         initComponents();
-        loadTable();
+        try {
+            loadTable();
+        } catch (ExceptionDAO ex) {
+            Logger.getLogger(ConsultarCarteiraSelecioneTutor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultarCarteiraSelecioneTutor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -158,14 +164,7 @@ public class ConsultarCarteiraSelecioneTutor extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        ConsultarCarteiraSelecioneAnimal consultarCarteiraSelecioneAnimal = null;
-        try {
-            consultarCarteiraSelecioneAnimal = new ConsultarCarteiraSelecioneAnimal();
-        } catch (ExceptionDAO ex) {
-            Logger.getLogger(ConsultarCarteiraSelecioneTutor.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(ConsultarCarteiraSelecioneTutor.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        ConsultarCarteiraSelecioneAnimal consultarCarteiraSelecioneAnimal = ConsultarCarteiraSelecioneAnimal();
         showPanel(consultarCarteiraSelecioneAnimal);
     }//GEN-LAST:event_jButton6ActionPerformed
 
