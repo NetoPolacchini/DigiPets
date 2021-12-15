@@ -9,24 +9,24 @@ static Connection connection = null;
     public static Connection getConnection() {
   
        try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/digipets", "root", "");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/digipetsnew", "root", "Defesaforte1!");
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
   if (connection == null){
    try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/digipets", "root", "");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/digipetsnew", "root", "Defesaforte1!");
         } catch (SQLException e) {
             e.printStackTrace();
         } 

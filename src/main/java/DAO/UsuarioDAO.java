@@ -39,7 +39,7 @@ public class UsuarioDAO {
     }
     
     public boolean cadastrarUsuario(){
-        String sql = "INSERT INTO usuario(usuario_tipo, usuario_login, usuario_senha, usuario_nome, usuario_cpf, usuario_dataNascimento, usuario_email, usuario_endereco) VALUES (?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO usuario (cpf, nome, senha, tipoUsuario) VALUES (?,?,?,1)";
         try{
             connect.getConnection();
             statement = connect.connection.prepareStatement(sql);
@@ -100,14 +100,14 @@ public class UsuarioDAO {
                     
                     Usuario tutor = new Usuario();
                     
-                    tutor.setCpf(rs.getString("cod"));
+                    tutor.setIdUsuario(rs.getInt("idUsuario"));
+                    tutor.setCpf(rs.getString("cpf"));
                     tutor.setNome(rs.getString("nome"));
-                    tutor.setSenha(rs.getString("raca"));
                     tutores.add(tutor);
                 }
             }
         } catch (SQLException e) {
-            throw new ExceptionDAO("Erro ao consultar item");
+            throw new ExceptionDAO("Erro ao consultar tutor");
         } finally {
             try {
                 if (pStatement != null) {
