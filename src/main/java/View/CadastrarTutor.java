@@ -5,7 +5,7 @@
  */
 package View;
 
-import Control.TutorController;
+import Control.UsuarioController;
 import javax.swing.JOptionPane;
 
 /**
@@ -154,12 +154,12 @@ public class CadastrarTutor extends javax.swing.JPanel {
     public void CadastrarTutor() {
         boolean sucesso;
         try {
-            TutorController tutorcontroller = new TutorController();
+            UsuarioController tutorcontroller = new UsuarioController();
 
             String nome = jTextFieldNomeTutor.getText();
             String cpf = jTextFieldCpfTutor.getText();
             String senha = jTextFieldCpfTutor.getText() ;
-            sucesso = TutorController.cadastrarTutor(nome, cpf, senha);
+            sucesso = UsuarioController.cadastrarTutor(nome, cpf, senha);
 
             if (sucesso == true) {
 

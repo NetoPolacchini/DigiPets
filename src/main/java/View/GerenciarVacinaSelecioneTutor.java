@@ -4,10 +4,10 @@
  * and open the template in the editor.
  */
 package View;
-import Control.TutorController;
+import Control.UsuarioController;
 import DAO.ExceptionDAO;
-import DAO.TutorDAO;
-import Model.Tutor;
+import DAO.UsuarioDAO;
+import Model.Usuario;
 import java.awt.BorderLayout;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -217,11 +217,11 @@ public class GerenciarVacinaSelecioneTutor extends javax.swing.JPanel {
   public void listarTutor() throws ExceptionDAO, SQLException {
       DefaultTableModel tableModel = (DefaultTableModel) jTableTutores5.getModel();
         tableModel.setRowCount(0);
-        TutorController tutorController = new TutorController();
+        UsuarioController tutorController = new UsuarioController();
          
-         ArrayList<Tutor> itens = tutorController.listarTutor();
-         itens.forEach((Tutor tutor) -> {
-                tableModel.addRow(new Object[] { tutor.getCod_tutor(), tutor.getCpf(), tutor.getNome()});
+         ArrayList<Usuario> itens = tutorController.listarTutor();
+         itens.forEach((Usuario tutor) -> {
+                tableModel.addRow(new Object[] { tutor.getIdUsuario(), tutor.getCpf(), tutor.getNome()});
             });
          
          
@@ -233,12 +233,12 @@ public class GerenciarVacinaSelecioneTutor extends javax.swing.JPanel {
         DefaultTableModel modelo = (DefaultTableModel)jTableTutores5.getModel();
         modelo.setNumRows(0);
         
-        TutorDAO tdao = new TutorDAO();
+        UsuarioDAO tdao = new UsuarioDAO();
         
-        for(Tutor t: tdao.listarTutor()){
+        for(Usuario t: tdao.listarTutor()){
             
             modelo.addRow(new Object[]{
-                t.getCod_tutor(),
+                t.getIdUsuario(),
                 t.getCpf(),
                 t.getNome()
             });

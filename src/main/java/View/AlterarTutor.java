@@ -6,8 +6,8 @@
 package View;
 
 import DAO.ExceptionDAO;
-import DAO.TutorDAO;
-import Model.Tutor;
+import DAO.UsuarioDAO;
+import Model.Usuario;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -237,14 +237,14 @@ public class AlterarTutor extends javax.swing.JPanel {
         DefaultTableModel modelo = (DefaultTableModel)jTableTutores.getModel();
         modelo.setNumRows(0);
         
-        TutorDAO tdao = new TutorDAO();
+        UsuarioDAO tdao = new UsuarioDAO();
         
-        for(Tutor t: tdao.listarTutor()){
+        for(Usuario u: tdao.listarTutor()){
             
             modelo.addRow(new Object[]{
-                t.getCod_tutor(),
-                t.getNome(),
-                t.getCpf()
+                u.getIdUsuario(),
+                u.getNome(),
+                u.getCpf()
             });
             
         }
@@ -255,12 +255,12 @@ public class AlterarTutor extends javax.swing.JPanel {
        
         if(jTableTutores.getSelectedRow() != -1) {
         
-            Tutor t = new Tutor();
-            TutorDAO tdao = new TutorDAO();
+            Usuario t = new Usuario();
+            UsuarioDAO tdao = new UsuarioDAO();
             
             t.setNome(txtNome.getText());
             t.setCpf(txtCpf.getText());
-            t.setCod_tutor((int) jTableTutores.getValueAt(jTableTutores.getSelectedRow(), 0));
+            t.setIdUsuario((int) jTableTutores.getValueAt(jTableTutores.getSelectedRow(), 0));
             
             tdao.alterarTutor(t);
             

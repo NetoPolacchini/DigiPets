@@ -5,8 +5,8 @@
  */
 package View;
 import DAO.ExceptionDAO;
-import DAO.TutorDAO;
-import Model.Tutor;
+import DAO.UsuarioDAO;
+import Model.Usuario;
 import java.awt.BorderLayout;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -194,12 +194,12 @@ public class GerenciarAnimalSelecioneTutor extends javax.swing.JPanel {
         DefaultTableModel modelo = (DefaultTableModel)jTableTutores5.getModel();
         modelo.setNumRows(0);
         
-        TutorDAO tdao = new TutorDAO();
+        UsuarioDAO tdao = new UsuarioDAO();
         
-        for(Tutor t: tdao.listarTutor()){
+        for(Usuario t: tdao.listarTutor()){
             
             modelo.addRow(new Object[]{
-                t.getCod_tutor(),
+                t.getIdUsuario(),
                 t.getCpf(),
                 t.getNome()
             });

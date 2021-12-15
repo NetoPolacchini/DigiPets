@@ -5,10 +5,27 @@
  */
 package Control;
 
+import DAO.ExceptionDAO;
+import Model.Usuario;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 /**
  *
  * @author Vitão
  */
 public class UsuarioController {
+    
+    public static boolean cadastrarTutor(String nome, String cpf, String senha) throws ExceptionDAO {
+        if (nome != null && nome.length() > 0 && cpf != null && cpf.length() > 0 && senha != null && senha.length() > 0) {
+            Usuario usuario = new Usuario();
+            return true;
+        }
+        return false;
+    }
+    
+    public ArrayList<Usuario> listarTutor() throws ExceptionDAO, SQLException {
+		return new Usuario().listarTutor();
+    }
     
 }

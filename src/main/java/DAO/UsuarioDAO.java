@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import Model.Usuario;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class UsuarioDAO {
@@ -20,7 +21,7 @@ public class UsuarioDAO {
     
     
     public boolean autenticarUsuarioSenha() {
-        sql = "SELECT * FROM usuario WHERE usuario_login = ? AND usuario_senha = ?";
+        sql = "SELECT * FROM usuario WHERE cpf = ? AND senha = ?";
         try {
             statement = connect.connection.prepareStatement(sql);
             statement.setString(1, usuario.getCpf());
@@ -42,14 +43,9 @@ public class UsuarioDAO {
         try{
             connect.getConnection();
             statement = connect.connection.prepareStatement(sql);
-            statement.setString(1, usuario.getTipo());
-            statement.setString(2, usuario.getCpf());
+            statement.setString(1, usuario.getCpf());
+            statement.setString(2, usuario.getNome());
             statement.setString(3, usuario.getSenha());
-            statement.setString(4, usuario.getNome());
-            statement.setString(5, usuario.getCpf());
-            statement.setString(6, usuario.getDataDeNascimento());
-            statement.setString(7, usuario.getEmail());
-            statement.setString(8, usuario.getEndereco());
             statement.execute();
             return true;
         } catch (SQLException ex) {
@@ -60,8 +56,8 @@ public class UsuarioDAO {
         }
     }
     
-    public boolean buscarUsuario() {
-        sql = "SELECT * FROM usuario WHERE usuario_login = ? AND usuario_senha = ?";
+    /*public boolean buscarUsuario() {
+        sql = "SELECT * FROM usuario WHERE cpf = ? AND senha = ?";
         try {
             connect.getConnection();
             statement = connect.connection.prepareStatement(sql);
@@ -83,6 +79,84 @@ public class UsuarioDAO {
             return false;
         } finally {
             connect.close();
+        }
+    }*/
+    
+    
+    public ArrayList<Usuario> listarTutor() throws ExceptionDAO, SQLException {
+        String sql = " SELECT * FROM usuario WHERE tipoUsuario = 1";
+        PreparedStatement pStatement = null;
+        ArrayList<Usuario> tutores = null;
+
+        try {
+            pStatement = ConnectionMVC.getConnection().prepareStatement(sql);
+            ResultSet rs = pStatement.executeQuery(sql);
+
+            if (rs != null) {
+                
+                tutores = new ArrayList<Usuario>();
+                
+                while (rs.next()) {
+                    
+                    Usuario tutor = new Usuario();
+                    
+                    tutor.setCpf(rs.getString("cod"));
+                    tutor.setNome(rs.getString("nome"));
+                    tutor.setSenha(rs.getString("raca"));
+                    tutores.add(tutor);
+                }
+            }
+        } catch (SQLException e) {
+            throw new ExceptionDAO("Erro ao consultar item");
+        } finally {
+            try {
+                if (pStatement != null) {
+                    pStatement.close();
+                }
+            } catch (SQLException e) {
+                throw new ExceptionDAO("Erro ao fechar o pStatement" + e);
+            }
+        }
+         try {
+                if (pStatement != null) {
+                    pStatement.close();
+                }
+        } catch (SQLException e) {
+            throw new ExceptionDAO("Erro ao fechar conexão" + e);
+        }
+
+        return tutores;
+    }
+    
+    public void alterarTutor(Usuario usuario) throws ExceptionDAO{
+        String sql = "UPDATE usuario SET nome=?, cpf=? WHERE idUsuario=?";
+        PreparedStatement pStatement = null;
+
+        try {
+
+            pStatement = ConnectionMVC.getConnection().prepareStatement(sql);
+            
+            pStatement.setString(1, usuario.getNome());
+            pStatement.setString(2, usuario.getCpf());
+            pStatement.setInt(3, usuario.getIdUsuario());
+            
+            pStatement.execute();
+            
+        } catch (SQLException e) {
+            throw new ExceptionDAO("Erro ao alterar dados de tutor");
+        } finally {
+            try {
+                if (pStatement != null) {
+                    pStatement.close();
+                }
+            } catch (SQLException e) {
+                throw new ExceptionDAO("Erro ao fechar statement " + e);
+            }
+            try {
+                ConnectionMVC.getConnection().close();
+            } catch (SQLException e) {
+                throw new ExceptionDAO("Erro ao fechar conexão " + e);
+            }
         }
     }
 }
