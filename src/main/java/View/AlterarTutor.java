@@ -258,8 +258,9 @@ public class AlterarTutor extends javax.swing.JPanel {
             Usuario t = new Usuario();
             UsuarioDAO tdao = new UsuarioDAO();
             
-            t.setNome(txtNome.getText());
+            
             t.setCpf(txtCpf.getText());
+            t.setNome(txtNome.getText());
             t.setIdUsuario((int) jTableTutores.getValueAt(jTableTutores.getSelectedRow(), 0));
             
             tdao.alterarTutor(t);

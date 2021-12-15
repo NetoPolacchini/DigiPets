@@ -2,37 +2,39 @@ package Model;
 
 import DAO.CarteiraDAO;
 import DAO.ExceptionDAO;
+import java.util.Date;
 
 public class Carteira {
     
-    private Vacina vacina;
-    private Animal animal;
     private int cod;
+    private String nomeVacina;
+    private Date dataAplicVacina;
+    private int idVacina;
 
-    public Carteira(Vacina vacina, Animal animal) {
-        this.vacina = vacina;
-        this.animal = animal;
+    public Carteira(int cod, String nomeVacina, Date dataAplicVacina) {
+       this.cod = cod;
+       this.nomeVacina = nomeVacina;
+       this.dataAplicVacina = dataAplicVacina;
     }
     
     public Carteira(){};
+
+    public String getNomeVacina() {
+        return nomeVacina;
+    }
+
+    public void setNomeVacina(String nomeVacina) {
+        this.nomeVacina = nomeVacina;
+    }
+
+    public Date getDataAplicVacina() {
+        return dataAplicVacina;
+    }
+
+    public void setDataAplicVacina(Date dataAplicVacina) {
+        this.dataAplicVacina = dataAplicVacina;
+    }
     
-
-    public Vacina getVacina() {
-        return vacina;
-    }
-
-    public void setVacina(Vacina vacina) {
-        this.vacina = vacina;
-    }
-
-    public Animal getAnimal() {
-        return animal;
-    }
-
-    public void setAnimal(Animal animal) {
-        this.animal = animal;
-    }
-
     public int getCod() {
         return cod;
     }
@@ -40,6 +42,16 @@ public class Carteira {
     public void setCod(int cod) {
         this.cod = cod;
     }
+
+    public int getIdVacina() {
+        return idVacina;
+    }
+
+    public void setIdVacina(int idVacina) {
+        this.idVacina = idVacina;
+    }
+    
+    
     
     
     

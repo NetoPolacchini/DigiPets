@@ -12,13 +12,17 @@ import java.util.ArrayList;
 public class CarteiraDAO {
 
     public void cadastrarCarteira(Carteira carteira) throws ExceptionDAO {
-        String sql = "INSERT INTO carteira(idCarteiraAnimal) VALUES (?)";
+        String sql = "INSERT INTO carteira(idCarteiraAnimal, nomeVacina, dataAplicVacina) VALUES (?, ?, ?)";
         PreparedStatement pStatement = null;
 
         try {
 
             pStatement = ConnectionMVC.getConnection().prepareStatement(sql);
-            pStatement.setInt(1, carteira.getAnimal().getCod());
+            
+            pStatement.setInt(1, carteira.getCod());
+            pStatement.setString(2, carteira.getNomeVacina());
+            pStatement.setDate(3, (Date) carteira.getDataAplicVacina());
+            
             pStatement.execute();
         } catch (SQLException e) {
             throw new ExceptionDAO("Erro ao cadastrar carteira");
@@ -45,9 +49,10 @@ public class CarteiraDAO {
         try {
 
             pStatement = ConnectionMVC.getConnection().prepareStatement(sql);
-            pStatement.setString(1, carteira.getVacina().getNome_vacina());
-            pStatement.setString(2, carteira.getAnimal().getNome());
-            pStatement.setInt(3, carteira.getCod());
+            
+            pStatement.setString(1, carteira.getNomeVacina());
+            pStatement.setDate(2, (Date) carteira.getDataAplicVacina());
+            
             pStatement.execute();
         } catch (SQLException e) {
             throw new ExceptionDAO("Erro ao alterar carteira");
@@ -68,7 +73,7 @@ public class CarteiraDAO {
     }
 
     public void removerCarteira(Carteira carteira) throws ExceptionDAO {
-        String sql = "DELETE carteira WHERE idCarteiraAnimal=?";
+        String sql = "DELETE carteira WHERE idVacina=?";
         PreparedStatement pStatement = null;
 
         try {
@@ -94,5 +99,50 @@ public class CarteiraDAO {
         }
     }
     
+    public ArrayList<Carteira> listarCarteira(int a) throws ExceptionDAO, SQLException {
+        String sql = " SELECT * FROM carteira WHERE idCarteiraAnimal = a";
+        PreparedStatement pStatement = null;
+        ArrayList<Carteira> carteira = null;
+
+        try {
+            pStatement = ConnectionMVC.getConnection().prepareStatement(sql);
+            ResultSet rs = pStatement.executeQuery(sql);
+
+            if (rs != null) {
+                
+                carteira = new ArrayList<Carteira>();
+                
+                while (rs.next()) {
+                    
+                    Carteira card = new Carteira();
+                    
+                    card.setCod(rs.getInt("idCarteiraAnimal"));
+                    card.setNomeVacina(rs.getString("nomeVacina"));
+                    
+                    carteira.add(card);
+                }
+            }
+        } catch (SQLException e) {
+            throw new ExceptionDAO("Erro ao consultar item");
+        } finally {
+            try {
+                if (pStatement != null) {
+                    pStatement.close();
+                }
+            } catch (SQLException e) {
+                throw new ExceptionDAO("Erro ao fechar o pStatement" + e);
+            }
+        }
+         try {
+                if (pStatement != null) {
+                    pStatement.close();
+                }
+        } catch (SQLException e) {
+            throw new ExceptionDAO("Erro ao fechar conexão" + e);
+        }
+
+        return carteira;
+    }
     
 }
+

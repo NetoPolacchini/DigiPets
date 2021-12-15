@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package View;
 
 import DAO.AnimalDAO;
@@ -191,7 +186,21 @@ public class RemoverAnimal extends javax.swing.JPanel {
     }//GEN-LAST:event_jTableTutores2MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        try {
+            removerAnimal();
+        } catch (ExceptionDAO ex) {
+            Logger.getLogger(RemoverAnimal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(RemoverAnimal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            loadTable();
+        } catch (ExceptionDAO ex) {
+            Logger.getLogger(RemoverAnimal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(RemoverAnimal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void loadTable() throws ExceptionDAO, SQLException{
@@ -209,7 +218,7 @@ public class RemoverAnimal extends javax.swing.JPanel {
         }
     };
     
-    public void alterarAnimal() throws ExceptionDAO, SQLException {
+    public void removerAnimal() throws ExceptionDAO, SQLException {
        
         if(jTableTutores2.getSelectedRow() != -1) {
         
