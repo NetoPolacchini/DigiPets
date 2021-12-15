@@ -369,9 +369,7 @@ public class AlterarAnimal extends javax.swing.JPanel {
             txtRaca.setText("");
             txtObsGerais.setText("");
             buttonGroup1.setSelected(null, false);
-            
             loadTable();
-            
         }
   
     }

@@ -4,6 +4,15 @@
  * and open the template in the editor.
  */
 package View;
+
+import DAO.AnimalDAO;
+import DAO.ExceptionDAO;
+import Model.Animal;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author joao_
@@ -15,6 +24,13 @@ public class RemoverAnimal extends javax.swing.JPanel {
      */
     public RemoverAnimal() {
         initComponents();
+        try {
+            loadTable();
+        } catch (ExceptionDAO ex) {
+            Logger.getLogger(RemoverAnimal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(RemoverAnimal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -31,7 +47,7 @@ public class RemoverAnimal extends javax.swing.JPanel {
         SubMenu6 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
-        jTextFieldCodAnimal = new javax.swing.JTextField();
+        txtCodAnimal = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTableTutores2 = new javax.swing.JTable();
@@ -64,8 +80,13 @@ public class RemoverAnimal extends javax.swing.JPanel {
         jButton3.setBackground(new java.awt.Color(79, 171, 201));
         jButton3.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jButton3.setText("Confirmar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
-        jTextFieldCodAnimal.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        txtCodAnimal.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
 
         jLabel16.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel16.setText("Código do animal:");
@@ -109,7 +130,7 @@ public class RemoverAnimal extends javax.swing.JPanel {
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel16)
-                            .addComponent(jTextFieldCodAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtCodAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
@@ -122,7 +143,7 @@ public class RemoverAnimal extends javax.swing.JPanel {
                 .addGap(45, 45, 45)
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextFieldCodAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCodAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(130, 130, 130))
@@ -165,46 +186,54 @@ public class RemoverAnimal extends javax.swing.JPanel {
 
     private void jTableTutores2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTutores2MouseClicked
         // TODO add your handling code here:
+        txtCodAnimal.setText((String) jTableTutores2.getValueAt(jTableTutores2.getSelectedRow(), 1));
+
     }//GEN-LAST:event_jTableTutores2MouseClicked
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void loadTable() throws ExceptionDAO, SQLException{
+        DefaultTableModel modelo = (DefaultTableModel)jTableTutores2.getModel();
+        modelo.setNumRows(0);
+        
+        AnimalDAO adao = new AnimalDAO();
+        
+        for(Animal a: adao.listarAnimal()){
+            
+            modelo.addRow(new Object[]{
+                a.getCod(),
+                a.getNome()
+            });
+        }
+    };
+    
+    public void alterarAnimal() throws ExceptionDAO, SQLException {
+       
+        if(jTableTutores2.getSelectedRow() != -1) {
+        
+            Animal a = new Animal();
+            AnimalDAO adao = new AnimalDAO();
+            
+            a.setNome(txtCodAnimal.getText());
+            adao.removerAnimal(a);
+            
+            txtCodAnimal.setText("");
+            loadTable();
+        }
+  
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel SubMenu;
-    private javax.swing.JPanel SubMenu1;
-    private javax.swing.JPanel SubMenu2;
-    private javax.swing.JPanel SubMenu3;
-    private javax.swing.JPanel SubMenu4;
-    private javax.swing.JPanel SubMenu5;
     private javax.swing.JPanel SubMenu6;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTableTutores;
-    private javax.swing.JTable jTableTutores1;
     private javax.swing.JTable jTableTutores2;
-    private javax.swing.JTextField jTextFieldCodAnimal;
-    private javax.swing.JTextField jTextFieldCpfTutor;
-    private javax.swing.JTextField jTextFieldCpfTutor1;
+    private javax.swing.JTextField txtCodAnimal;
     // End of variables declaration//GEN-END:variables
 }

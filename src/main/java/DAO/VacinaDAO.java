@@ -10,14 +10,14 @@ import java.util.ArrayList;
 public class VacinaDAO {
 
     public void cadastrarVacina(Vacina vacina) throws ExceptionDAO, SQLException {
-        String sql = "INSERT INTO carteira(nomeVacina, idCarteiraAnimal dataAplicVacina) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO carteira(nomeVacina, idCarteiraAnimal, dataAplicVacina) VALUES (?, ?, ?)";
         PreparedStatement pStatement = null;
 
         try {
 
             pStatement = ConnectionMVC.getConnection().prepareStatement(sql);
             pStatement.setString(1, vacina.getNome_vacina());
-            pStatement.setInt(2, vacina.getCod_vacina());
+           // pStatement.setInt(2, ());
             pStatement.setDate(3, (Date) vacina.getData_aplic_vacina());
             pStatement.execute();
         } catch (SQLException e) {
@@ -39,7 +39,7 @@ public class VacinaDAO {
     }
 
     public void alterarVacina(Vacina vacina) throws ExceptionDAO, SQLException {
-        String sql = "UPDATE animal(nome, cod, data)";
+        String sql = "UPDATE animal SET nome=?, cod=?, data=?";
         PreparedStatement pStatement = null;
 
         try {

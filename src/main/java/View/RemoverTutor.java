@@ -4,6 +4,15 @@
  * and open the template in the editor.
  */
 package View;
+
+import DAO.ExceptionDAO;
+import DAO.TutorDAO;
+import Model.Tutor;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author joao_
@@ -15,6 +24,13 @@ public class RemoverTutor extends javax.swing.JPanel {
      */
     public RemoverTutor() {
         initComponents();
+        try {
+            loadTable();
+        } catch (ExceptionDAO ex) {
+            Logger.getLogger(RemoverTutor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(RemoverTutor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -145,6 +161,22 @@ public class RemoverTutor extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTableTutoresMouseClicked
 
+    private void loadTable() throws ExceptionDAO, SQLException{
+        DefaultTableModel modelo = (DefaultTableModel)jTableTutores.getModel();
+        modelo.setNumRows(0);
+        
+        TutorDAO tdao = new TutorDAO();
+        
+        for(Tutor t: tdao.listarTutor()){
+            
+            modelo.addRow(new Object[]{
+                t.getCod_tutor(),
+                t.getCpf(),
+                t.getNome()
+            });
+        }
+    };
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel SubMenu;
