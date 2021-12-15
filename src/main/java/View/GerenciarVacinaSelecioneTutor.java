@@ -28,6 +28,7 @@ public class GerenciarVacinaSelecioneTutor extends javax.swing.JPanel {
      */
     public GerenciarVacinaSelecioneTutor() {
         initComponents();
+        
     }
 
     /**

@@ -154,12 +154,6 @@ public class AlterarAnimal extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(jTableAnimais);
-        if (jTableAnimais.getColumnModel().getColumnCount() > 0) {
-            jTableAnimais.getColumnModel().getColumn(0).setHeaderValue("ID");
-            jTableAnimais.getColumnModel().getColumn(1).setHeaderValue("Nome");
-            jTableAnimais.getColumnModel().getColumn(2).setHeaderValue("Raça");
-            jTableAnimais.getColumnModel().getColumn(3).setHeaderValue("Espécie");
-        }
 
         jLabel8.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel8.setText("Obsevações gerais:");

@@ -60,8 +60,11 @@ public class HomeVeterinario extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel2.setText("Gerenciar usuário");
-
-        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\joao_\\Documents\\NetBeansProjects\\ProjetoDigipets\\src\\main\\java\\com\\mycompany\\projetodigipets\\view\\imagens\\icons8_user_50px_3.png")); // NOI18N
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout BotaoGerenciarUsuarioLayout = new javax.swing.GroupLayout(BotaoGerenciarUsuario);
         BotaoGerenciarUsuario.setLayout(BotaoGerenciarUsuarioLayout);
@@ -99,8 +102,6 @@ public class HomeVeterinario extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel4.setText("Consultar carteira");
 
-        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\joao_\\Documents\\NetBeansProjects\\ProjetoDigipets\\src\\main\\java\\com\\mycompany\\projetodigipets\\view\\imagens\\icons8_document_50px.png")); // NOI18N
-
         javax.swing.GroupLayout BotaoConsultarCarteiraLayout = new javax.swing.GroupLayout(BotaoConsultarCarteira);
         BotaoConsultarCarteira.setLayout(BotaoConsultarCarteiraLayout);
         BotaoConsultarCarteiraLayout.setHorizontalGroup(
@@ -137,8 +138,6 @@ public class HomeVeterinario extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel3.setText("Gerenciar vacina");
 
-        jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\joao_\\Documents\\NetBeansProjects\\ProjetoDigipets\\src\\main\\java\\com\\mycompany\\projetodigipets\\view\\imagens\\icons8_syringe_40px.png")); // NOI18N
-
         javax.swing.GroupLayout BotaoGerenciarVacinaLayout = new javax.swing.GroupLayout(BotaoGerenciarVacina);
         BotaoGerenciarVacina.setLayout(BotaoGerenciarVacinaLayout);
         BotaoGerenciarVacinaLayout.setHorizontalGroup(
@@ -164,8 +163,6 @@ public class HomeVeterinario extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe Script", 3, 24)); // NOI18N
         jLabel1.setText("Digipets");
-
-        jLabel8.setIcon(new javax.swing.ImageIcon("C:\\Users\\joao_\\Documents\\NetBeansProjects\\ProjetoDigipets\\src\\main\\java\\com\\mycompany\\projetodigipets\\view\\imagens\\icons8_doge_100px.png")); // NOI18N
 
         javax.swing.GroupLayout MenuLayout = new javax.swing.GroupLayout(Menu);
         Menu.setLayout(MenuLayout);
@@ -296,7 +293,7 @@ public class HomeVeterinario extends javax.swing.JFrame {
     }//GEN-LAST:event_BotaoGerenciarUsuarioMouseClicked
 
     private void BotaoConsultarCarteiraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoConsultarCarteiraMouseClicked
-        ConsultarCarteiraSelecioneTutor consultarCarteiraSelecioneTutor = null;
+        ConsultarCarteiraSelecioneTutor consultarCarteiraSelecioneTutor = null ;
         try {
             consultarCarteiraSelecioneTutor = new ConsultarCarteiraSelecioneTutor();
         } catch (ExceptionDAO ex) {
@@ -308,7 +305,7 @@ public class HomeVeterinario extends javax.swing.JFrame {
     }//GEN-LAST:event_BotaoConsultarCarteiraMouseClicked
 
     private void BotaoGerenciarVacinaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoGerenciarVacinaMouseClicked
-         GerenciarVacinaSelecioneTutor gerenciarVacinaSelecioneTutor = new GerenciarVacinaSelecioneTutor();
+        GerenciarVacinaSelecioneTutor gerenciarVacinaSelecioneTutor = new GerenciarVacinaSelecioneTutor();
         showPanel(gerenciarVacinaSelecioneTutor);
     }//GEN-LAST:event_BotaoGerenciarVacinaMouseClicked
 
@@ -337,6 +334,10 @@ public class HomeVeterinario extends javax.swing.JFrame {
         resetColor(BotaoGerenciarVacina);
         resetColor(BotaoGerenciarUsuario);
     }//GEN-LAST:event_BotaoConsultarCarteiraMousePressed
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel2MouseClicked
     
     public void showPanel(JPanel panel){
         panel.setSize(750,740);
