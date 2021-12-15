@@ -159,6 +159,7 @@ public class CadastrarTutor extends javax.swing.JPanel {
             String nome = jTextFieldNomeTutor.getText();
             String cpf = jTextFieldCpfTutor.getText();
             String senha = jTextFieldCpfTutor.getText() ;
+            
             sucesso = UsuarioController.cadastrarTutor(nome, cpf, senha);
 
             if (sucesso == true) {

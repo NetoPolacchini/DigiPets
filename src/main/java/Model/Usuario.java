@@ -1,4 +1,3 @@
-
 package Model;
 
 import DAO.ExceptionDAO;
@@ -24,6 +23,12 @@ public class Usuario {
         this.crm = crm;
         this.idUsuario = idUsuario;
     }
+    
+    public Usuario(String nome, String cpf, String senha){
+        this.nome = nome;
+        this.cpf = cpf;
+        this.senha = senha;
+    };
     
     public Usuario(){}
    
@@ -80,5 +85,7 @@ public class Usuario {
 		return new UsuarioDAO().listarTutor();
     }
     
-    
+    public static void cadastrarTutor(Usuario usuario) throws ExceptionDAO {
+        new UsuarioDAO().cadastrarUsuario(usuario);
+    }
 }

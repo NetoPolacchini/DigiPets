@@ -26,7 +26,6 @@ public class ConsultarCarteiraSelecioneAnimal extends javax.swing.JPanel {
      */
     public ConsultarCarteiraSelecioneAnimal() {
         initComponents();
-        showPanel(jPanel8);
         try {
             loadTable();
         } catch (ExceptionDAO ex) {
@@ -174,7 +173,7 @@ public class ConsultarCarteiraSelecioneAnimal extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        ConsultarCarteiraVeterinario consultarCarteiraVeterinario = new ConsultarCarteiraVeterinario();
+        ConsultarCarteiraVeterinario consultarCarteiraVeterinario = new ConsultarCarteiraVeterinario((int) jTableTutores5.getValueAt(jTableTutores5.getSelectedRow(), 0));
         showPanel(consultarCarteiraVeterinario);
     }//GEN-LAST:event_jButton8ActionPerformed
 

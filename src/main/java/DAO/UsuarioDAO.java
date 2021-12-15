@@ -38,7 +38,7 @@ public class UsuarioDAO {
         }
     }
     
-    public boolean cadastrarUsuario(){
+    public boolean cadastrarUsuario(Usuario usuario){
         String sql = "INSERT INTO usuario (cpf, nome, senha, tipoUsuario) VALUES (?,?,?,1)";
         try{
             connect.getConnection();
@@ -159,4 +159,6 @@ public class UsuarioDAO {
             }
         }
     }
+
+ 
 }

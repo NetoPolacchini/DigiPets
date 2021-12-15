@@ -17,8 +17,10 @@ import java.util.ArrayList;
 public class UsuarioController {
     
     public static boolean cadastrarTutor(String nome, String cpf, String senha) throws ExceptionDAO {
+        
         if (nome != null && nome.length() > 0 && cpf != null && cpf.length() > 0 && senha != null && senha.length() > 0) {
-            Usuario usuario = new Usuario();
+            Usuario tutor = new Usuario(nome, cpf, senha);
+            Usuario.cadastrarTutor(tutor);
             return true;
         }
         return false;

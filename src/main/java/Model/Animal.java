@@ -16,13 +16,14 @@ public class Animal {
     private String especie;
     private String obsGerais;
 
-    public Animal(String nome, String raca, String sexo, String especie, String obsGerais) {
+    public Animal(String nome, String raca, String sexo, String especie, String obsGerais, int cod_dono) {
 
         this.nome = nome;
         this.raca = raca;
         this.sexo = sexo;
         this.especie = especie;
         this.obsGerais = obsGerais;
+        this.cod_dono = cod_dono;
     }
 
     public Animal() {

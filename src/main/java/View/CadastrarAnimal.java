@@ -114,6 +114,7 @@ public class CadastrarAnimal extends javax.swing.JPanel {
         buttonGroup1.add(jRadioButtonFemea);
         jRadioButtonFemea.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jRadioButtonFemea.setText("femea");
+        jRadioButtonFemea.setActionCommand("Femea");
         jRadioButtonFemea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonFemeaActionPerformed(evt);
@@ -123,6 +124,7 @@ public class CadastrarAnimal extends javax.swing.JPanel {
         buttonGroup1.add(jRadioButtonMacho);
         jRadioButtonMacho.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jRadioButtonMacho.setText("macho");
+        jRadioButtonMacho.setActionCommand("Macho");
 
         jLabel5.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel5.setText("Código do Dono");
@@ -243,10 +245,10 @@ public class CadastrarAnimal extends javax.swing.JPanel {
             String raca = jTextFieldRacaAnimal.getText();
             String especie = jTextFieldEpecieAnimal.getText();
             String obs_gerais = jTextFieldObsGeraisAnimal.getText();
-            String sexo = buttonGroup1.getSelection().getActionCommand();
+            String sexo = (String) buttonGroup1.getSelection().getActionCommand();
             int cod_dono = Integer.parseInt(txtCod_dono.getText());
             
-            sucesso = AnimalController.cadastrarAnimal(nome, raca, sexo, especie, obs_gerais);
+            sucesso = AnimalController.cadastrarAnimal(nome, raca, sexo, especie, obs_gerais, cod_dono);
 
             if (sucesso == true) {
 
