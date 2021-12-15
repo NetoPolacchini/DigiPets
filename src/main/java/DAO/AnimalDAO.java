@@ -7,8 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class AnimalDAO {
-
+public class AnimalDAO  {
+    
     public void cadastrarAnimal(Animal animal) throws ExceptionDAO {
         String sql = "INSERT INTO animal(nome, raca, sexo, especie, obsGerais, idTutorAnimal) VALUES (?, ?, ?, ?, ?, ?)";
         PreparedStatement pStatement = null;

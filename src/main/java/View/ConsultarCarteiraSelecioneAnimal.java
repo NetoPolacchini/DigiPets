@@ -25,8 +25,9 @@ public class ConsultarCarteiraSelecioneAnimal extends javax.swing.JPanel {
      * @throws DAO.ExceptionDAO
      */
     public ConsultarCarteiraSelecioneAnimal() {
+        initComponents();
+        showPanel(jPanel8);
         try {
-            initComponents();
             loadTable();
         } catch (ExceptionDAO ex) {
             Logger.getLogger(ConsultarCarteiraSelecioneAnimal.class.getName()).log(Level.SEVERE, null, ex);

@@ -7,11 +7,15 @@ public class Usuario {
     private String nome;
     private String cpf;
     private String senha;
+    private int tipoUsuario;
+    private String crm;
 
-    public Usuario(String nome, String cpf, String senha) {
+    public Usuario(String nome, String cpf, String senha, int tipoUsuario, String crm) {
         this.nome = nome;
         this.cpf = cpf;
         this.senha = senha;
+        this.tipoUsuario = tipoUsuario;
+        this.crm = crm;
     }
     
     public Usuario(){}
@@ -40,4 +44,22 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public int getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(int tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    public String getCrm() {
+        return crm;
+    }
+
+    public void setCrm(String crm) {
+        this.crm = crm;
+    }
+    
+    
 }
