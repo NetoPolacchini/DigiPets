@@ -96,7 +96,7 @@ public class AlterarTutor extends javax.swing.JPanel {
         );
 
         jLabel1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jLabel1.setText("CPF");
+        jLabel1.setText("Nome");
 
         txtNome.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         txtNome.addActionListener(new java.awt.event.ActionListener() {
@@ -117,7 +117,7 @@ public class AlterarTutor extends javax.swing.JPanel {
         txtCpf.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jLabel7.setText("Nome");
+        jLabel7.setText("Cpf");
 
         jTableTutores.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTableTutores.setModel(new javax.swing.table.DefaultTableModel(

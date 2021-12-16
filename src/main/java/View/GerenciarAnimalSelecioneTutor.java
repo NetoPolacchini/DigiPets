@@ -47,10 +47,10 @@ public class GerenciarAnimalSelecioneTutor extends javax.swing.JPanel {
         SubMenu5 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
-        jTextFieldCodigoTutor = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         jScrollPane7 = new javax.swing.JScrollPane();
         jTableTutores5 = new javax.swing.JTable();
+        txtCodTutor = new javax.swing.JTextField();
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setPreferredSize(new java.awt.Dimension(750, 740));
@@ -85,8 +85,6 @@ public class GerenciarAnimalSelecioneTutor extends javax.swing.JPanel {
                 jButton6ActionPerformed(evt);
             }
         });
-
-        jTextFieldCodigoTutor.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
 
         jLabel18.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel18.setText("Código do Tutor:");
@@ -123,6 +121,12 @@ public class GerenciarAnimalSelecioneTutor extends javax.swing.JPanel {
         });
         jScrollPane7.setViewportView(jTableTutores5);
 
+        txtCodTutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodTutorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -136,8 +140,9 @@ public class GerenciarAnimalSelecioneTutor extends javax.swing.JPanel {
                         .addGap(32, 32, 32)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel18)
-                            .addComponent(jTextFieldCodigoTutor, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtCodTutor, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addComponent(SubMenu5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -150,9 +155,9 @@ public class GerenciarAnimalSelecioneTutor extends javax.swing.JPanel {
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
                 .addComponent(jLabel18)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextFieldCodigoTutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCodTutor, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(130, 130, 130))
         );
@@ -173,12 +178,18 @@ public class GerenciarAnimalSelecioneTutor extends javax.swing.JPanel {
 
     private void jTableTutores5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTutores5MouseClicked
         // TODO add your handling code here:
+        txtCodTutor.setText((String) jTableTutores5.getValueAt(jTableTutores5.getSelectedRow(),0));
     }//GEN-LAST:event_jTableTutores5MouseClicked
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         GerenciarAnimal gerenciarAnimal = new GerenciarAnimal();
+        gerenciarAnimal.setA((Integer.parseInt(txtCodTutor.getText())));
         showPanel(gerenciarAnimal);
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void txtCodTutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodTutorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodTutorActionPerformed
     
     public void showPanel(JPanel panel){
         panel.setSize(750,740);
@@ -216,6 +227,6 @@ public class GerenciarAnimalSelecioneTutor extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTable jTableTutores5;
-    private javax.swing.JTextField jTextFieldCodigoTutor;
+    private javax.swing.JTextField txtCodTutor;
     // End of variables declaration//GEN-END:variables
 }

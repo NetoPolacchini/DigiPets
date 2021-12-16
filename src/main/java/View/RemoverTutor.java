@@ -99,7 +99,15 @@ public class RemoverTutor extends javax.swing.JPanel {
             new String [] {
                 "Código", "CPF", "Nome"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTableTutores.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableTutoresMouseClicked(evt);

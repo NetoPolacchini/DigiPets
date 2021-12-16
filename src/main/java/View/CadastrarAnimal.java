@@ -17,8 +17,9 @@ public class CadastrarAnimal extends javax.swing.JPanel {
     /**
      * Creates new form CadastrarAnimal
      */
-    public CadastrarAnimal() {
+    public CadastrarAnimal(int a) {
         initComponents();
+        txtCod_dono.setText(Integer.toString(a));
     }
 
     /**
@@ -129,6 +130,7 @@ public class CadastrarAnimal extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel5.setText("Código do Dono");
 
+        txtCod_dono.setEditable(false);
         txtCod_dono.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

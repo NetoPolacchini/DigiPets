@@ -75,6 +75,8 @@ public class AnimalDAO  {
         }
     }
     
+    
+    
     public void removerAnimal(Animal animal) throws ExceptionDAO{
         String sql = "DELETE FROM animal WHERE idAnimal=?";
         PreparedStatement pStatement = null;
@@ -84,8 +86,9 @@ public class AnimalDAO  {
             pStatement = ConnectionMVC.getConnection().prepareStatement(sql);
             pStatement.setInt(1, animal.getCod());
             pStatement.execute();
+            
         } catch (SQLException e) {
-            throw new ExceptionDAO("Erro ao remover animal");
+            throw new ExceptionDAO("Erro ao remover tutor");
         } finally {
             try {
                 if (pStatement != null) {
@@ -119,7 +122,7 @@ public class AnimalDAO  {
                     
                     Animal anima = new Animal();
                     
-                    anima.setCod(rs.getInt("cod"));
+                    anima.setCod(rs.getInt("idAnimal"));
                     anima.setNome(rs.getString("nome"));
                     anima.setRaca(rs.getString("raca"));
                     anima.setSexo(rs.getString("sexo"));
@@ -149,6 +152,104 @@ public class AnimalDAO  {
 
         return animais;
     }
+    
+     public ArrayList<Animal> listarAnimalTutor(int a) throws ExceptionDAO, SQLException {
+        String sql = " SELECT * FROM animal WHERE idTutorAnimal = "+a;
+        PreparedStatement pStatement = null;
+        ArrayList<Animal> animais = null;
+
+        try {
+            pStatement = ConnectionMVC.getConnection().prepareStatement(sql);
+            ResultSet rs = pStatement.executeQuery(sql);
+               
+            if (rs != null) {
+                
+                animais = new ArrayList<Animal>();
+                
+                while (rs.next()) {
+                    
+                    Animal anima = new Animal();
+                    
+                    anima.setCod(rs.getInt("idAnimal"));
+                    anima.setNome(rs.getString("nome"));
+                    anima.setRaca(rs.getString("raca"));
+                    anima.setSexo(rs.getString("sexo"));
+                    anima.setEspecie(rs.getString("especie"));
+                    anima.setObsGerais(rs.getString("obsGerais"));
+                    animais.add(anima);
+                }
+            }
+        } catch (SQLException e) {
+            throw new ExceptionDAO("Erro ao consultar item");
+        } finally {
+            try {
+                if (pStatement != null) {
+                    pStatement.close();
+                }
+            } catch (SQLException e) {
+                throw new ExceptionDAO("Erro ao fechar o pStatement" + e);
+            }
+        }
+         try {
+                if (pStatement != null) {
+                    pStatement.close();
+                }
+        } catch (SQLException e) {
+            throw new ExceptionDAO("Erro ao fechar conexão" + e);
+        }
+
+        return animais;
+    }
+     
+     public ArrayList<Animal> listarAnimalFields(int a) throws ExceptionDAO, SQLException {
+        String sql = " SELECT * FROM animal WHERE idAnimal = "+a;
+        PreparedStatement pStatement = null;
+        ArrayList<Animal> animais = null;
+
+        try {
+            pStatement = ConnectionMVC.getConnection().prepareStatement(sql);
+            ResultSet rs = pStatement.executeQuery(sql);
+               
+            if (rs != null) {
+                
+                animais = new ArrayList<Animal>();
+                
+                while (rs.next()) {
+                    
+                    Animal anima = new Animal();
+                    
+                    anima.setCod(rs.getInt("idAnimal"));
+                    anima.setNome(rs.getString("nome"));
+                    anima.setRaca(rs.getString("raca"));
+                    anima.setSexo(rs.getString("sexo"));
+                    anima.setEspecie(rs.getString("especie"));
+                    anima.setObsGerais(rs.getString("obsGerais"));
+                    animais.add(anima);
+                }
+            }
+        } catch (SQLException e) {
+            throw new ExceptionDAO("Erro ao consultar item");
+        } finally {
+            try {
+                if (pStatement != null) {
+                    pStatement.close();
+                }
+            } catch (SQLException e) {
+                throw new ExceptionDAO("Erro ao fechar o pStatement" + e);
+            }
+        }
+         try {
+                if (pStatement != null) {
+                    pStatement.close();
+                }
+        } catch (SQLException e) {
+            throw new ExceptionDAO("Erro ao fechar conexão" + e);
+        }
+
+        return animais;
+    }
+    
+    
     
 }
 

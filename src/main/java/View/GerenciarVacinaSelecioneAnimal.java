@@ -23,10 +23,14 @@ public class GerenciarVacinaSelecioneAnimal extends javax.swing.JPanel {
     /**
      * Creates new form GerenciarVacinaSelecioneAnimal
      */
-    public GerenciarVacinaSelecioneAnimal(){
+    private int idTutor;
+
+    
+    public GerenciarVacinaSelecioneAnimal(int a){
         initComponents();
+        this.idTutor = a;
         try {
-            loadTable();
+            loadTable(a);
         } catch (ExceptionDAO ex) {
             Logger.getLogger(GerenciarVacinaSelecioneAnimal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -182,23 +186,22 @@ public class GerenciarVacinaSelecioneAnimal extends javax.swing.JPanel {
         this.repaint();
     }
     
-     private void loadTable() throws ExceptionDAO, SQLException{
+     private void loadTable(int a) throws ExceptionDAO, SQLException{
         DefaultTableModel modelo = (DefaultTableModel)jTableTutores5.getModel();
         modelo.setNumRows(0);
         
         AnimalDAO adao = new AnimalDAO();
         
-        for(Animal a: adao.listarAnimal()){
+        for(Animal ani: adao.listarAnimalTutor(a)){
             
             modelo.addRow(new Object[]{
-                a.getCod(),
-                a.getNome(),
-                a.getEspecie()
+                ani.getCod(),
+                ani.getNome(),
+                ani.getRaca(),
+                ani.getEspecie()
             });
-            
         }
-        
-    }
+    };
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel SubMenu5;

@@ -17,10 +17,12 @@ public class RemoverAnimal extends javax.swing.JPanel {
     /**
      * Creates new form RemoverAnimal
      */
-    public RemoverAnimal() {
+    private int a;
+    public RemoverAnimal(int a) {
         initComponents();
+        this.a = a;
         try {
-            loadTable();
+            loadTable(a);
         } catch (ExceptionDAO ex) {
             Logger.getLogger(RemoverAnimal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -42,8 +44,6 @@ public class RemoverAnimal extends javax.swing.JPanel {
         SubMenu6 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
-        txtCodAnimal = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTableTutores2 = new javax.swing.JTable();
 
@@ -81,11 +81,6 @@ public class RemoverAnimal extends javax.swing.JPanel {
             }
         });
 
-        txtCodAnimal.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-
-        jLabel16.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jLabel16.setText("Código do animal:");
-
         jTableTutores2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTableTutores2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -102,7 +97,15 @@ public class RemoverAnimal extends javax.swing.JPanel {
             new String [] {
                 "Código Animal", "Nome"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTableTutores2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableTutores2MouseClicked(evt);
@@ -122,10 +125,7 @@ public class RemoverAnimal extends javax.swing.JPanel {
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(32, 32, 32)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel16)
-                            .addComponent(txtCodAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
@@ -135,11 +135,7 @@ public class RemoverAnimal extends javax.swing.JPanel {
                 .addComponent(SubMenu6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addComponent(jLabel16)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtCodAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(130, 130, 130))
         );
@@ -181,7 +177,6 @@ public class RemoverAnimal extends javax.swing.JPanel {
 
     private void jTableTutores2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableTutores2MouseClicked
         // TODO add your handling code here:
-        txtCodAnimal.setText((String) jTableTutores2.getValueAt(jTableTutores2.getSelectedRow(), 1));
 
     }//GEN-LAST:event_jTableTutores2MouseClicked
 
@@ -195,7 +190,7 @@ public class RemoverAnimal extends javax.swing.JPanel {
         }
         
         try {
-            loadTable();
+            loadTable(a);
         } catch (ExceptionDAO ex) {
             Logger.getLogger(RemoverAnimal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -203,17 +198,19 @@ public class RemoverAnimal extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void loadTable() throws ExceptionDAO, SQLException{
+    private void loadTable(int a) throws ExceptionDAO, SQLException{
         DefaultTableModel modelo = (DefaultTableModel)jTableTutores2.getModel();
         modelo.setNumRows(0);
         
         AnimalDAO adao = new AnimalDAO();
         
-        for(Animal a: adao.listarAnimal()){
+        for(Animal ani: adao.listarAnimalTutor(a)){
             
             modelo.addRow(new Object[]{
-                a.getCod(),
-                a.getNome()
+                ani.getCod(),
+                ani.getNome(),
+                ani.getRaca(),
+                ani.getEspecie()
             });
         }
     };
@@ -222,14 +219,15 @@ public class RemoverAnimal extends javax.swing.JPanel {
        
         if(jTableTutores2.getSelectedRow() != -1) {
         
-            Animal a = new Animal();
+            Animal b = new Animal();
             AnimalDAO adao = new AnimalDAO();
             
-            a.setNome(txtCodAnimal.getText());
-            adao.removerAnimal(a);
+            b.setCod((int) jTableTutores2.getValueAt(jTableTutores2.getSelectedRow(), 0));
             
-            txtCodAnimal.setText("");
-            loadTable();
+            adao.removerAnimal(b);
+            
+           
+            loadTable(a);
         }
   
     }
@@ -238,11 +236,9 @@ public class RemoverAnimal extends javax.swing.JPanel {
     private javax.swing.JPanel SubMenu6;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTableTutores2;
-    private javax.swing.JTextField txtCodAnimal;
     // End of variables declaration//GEN-END:variables
 }

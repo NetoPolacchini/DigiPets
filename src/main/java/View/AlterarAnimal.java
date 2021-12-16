@@ -10,11 +10,13 @@ import javax.swing.table.DefaultTableModel;
 
 public class AlterarAnimal extends javax.swing.JPanel {
 
+    private int a;
     
-    public AlterarAnimal() {
+    public AlterarAnimal(int a) {
         initComponents();
+        this.a = a;
         try {
-            loadTable();
+            loadTable(a);
         } catch (ExceptionDAO ex) {
             Logger.getLogger(AlterarAnimal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -117,6 +119,7 @@ public class AlterarAnimal extends javax.swing.JPanel {
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jRadioButton1.setText("macho");
+        jRadioButton1.setActionCommand("Macho");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton1ActionPerformed(evt);
@@ -126,6 +129,7 @@ public class AlterarAnimal extends javax.swing.JPanel {
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jRadioButton2.setText("femea");
+        jRadioButton2.setActionCommand("Femea");
         jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton2ActionPerformed(evt);
@@ -288,11 +292,15 @@ public class AlterarAnimal extends javax.swing.JPanel {
     }//GEN-LAST:event_txtEspecieActionPerformed
 
     private void jTableAnimaisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAnimaisMouseClicked
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            loadFields((int) jTableAnimais.getValueAt(jTableAnimais.getSelectedRow(), 0));
+        } catch (ExceptionDAO ex) {
+            Logger.getLogger(AlterarAnimal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AlterarAnimal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        txtNome.setText((String) jTableAnimais.getValueAt(jTableAnimais.getSelectedRow(), 1));
-        txtRaca.setText((String) jTableAnimais.getValueAt(jTableAnimais.getSelectedRow(), 2));
-        txtEspecie.setText((String) jTableAnimais.getValueAt(jTableAnimais.getSelectedRow(), 3));
         
     }//GEN-LAST:event_jTableAnimaisMouseClicked
 
@@ -330,7 +338,7 @@ public class AlterarAnimal extends javax.swing.JPanel {
         }
         
         try {
-            loadTable();
+            loadTable(a);
         } catch (ExceptionDAO ex) {
             Logger.getLogger(AlterarAnimal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -338,19 +346,19 @@ public class AlterarAnimal extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_alterarButtomActionPerformed
 
-    private void loadTable() throws ExceptionDAO, SQLException{
+    private void loadTable(int a) throws ExceptionDAO, SQLException{
         DefaultTableModel modelo = (DefaultTableModel)jTableAnimais.getModel();
         modelo.setNumRows(0);
         
         AnimalDAO adao = new AnimalDAO();
         
-        for(Animal a: adao.listarAnimal()){
+        for(Animal ani: adao.listarAnimalTutor(a)){
             
             modelo.addRow(new Object[]{
-                a.getCod(),
-                a.getNome(),
-                a.getRaca(),
-                a.getEspecie()
+                ani.getCod(),
+                ani.getNome(),
+                ani.getRaca(),
+                ani.getEspecie()
             });
         }
     };
@@ -359,30 +367,42 @@ public class AlterarAnimal extends javax.swing.JPanel {
        
         if(jTableAnimais.getSelectedRow() != -1) {
         
-            Animal a = new Animal();
+            Animal ani = new Animal();
             AnimalDAO adao = new AnimalDAO();
             
-            a.setNome(txtNome.getText());
-            a.setRaca(txtRaca.getText());
-            a.setSexo(buttonGroup1.getSelection().getActionCommand());
-            a.setEspecie(txtEspecie.getText());
-            a.setObsGerais(txtObsGerais.getText());
-            a.setCod((int) jTableAnimais.getValueAt(jTableAnimais.getSelectedRow(), 0));
+            ani.setNome(txtNome.getText());
+            ani.setRaca(txtRaca.getText());
+            ani.setSexo((String)buttonGroup1.getSelection().getActionCommand());
+            ani.setEspecie(txtEspecie.getText());
+            ani.setObsGerais(txtObsGerais.getText());
+            ani.setCod((int) jTableAnimais.getValueAt(jTableAnimais.getSelectedRow(), 0));
 
             
-            adao.alterarAnimal(a);
+            adao.alterarAnimal(ani);
             
             txtNome.setText("");
             txtEspecie.setText("");
             txtRaca.setText("");
             txtObsGerais.setText("");
-            buttonGroup1.setSelected(null, false);
-            loadTable();
+            buttonGroup1.clearSelection();
+            loadTable(a);
         }
   
     }
     
-    
+    private void loadFields(int a) throws ExceptionDAO, SQLException{
+        AnimalDAO adao = new AnimalDAO();
+        
+        for(Animal ani: adao.listarAnimalFields(a)){
+            
+            txtNome.setText(ani.getNome());
+            txtEspecie.setText(ani.getEspecie());
+            txtRaca.setText(ani.getRaca());
+            txtObsGerais.setText(ani.getObsGerais());
+            
+           
+        }
+    }
 
 
     
