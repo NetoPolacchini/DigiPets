@@ -96,9 +96,14 @@ public class AlterarTutor extends javax.swing.JPanel {
         );
 
         jLabel1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jLabel1.setText("Nome:");
+        jLabel1.setText("CPF");
 
         txtNome.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        txtNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNomeActionPerformed(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(79, 171, 201));
         jButton1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
@@ -112,7 +117,7 @@ public class AlterarTutor extends javax.swing.JPanel {
         txtCpf.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jLabel7.setText("CPF:");
+        jLabel7.setText("Nome");
 
         jTableTutores.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTableTutores.setModel(new javax.swing.table.DefaultTableModel(
@@ -217,7 +222,6 @@ public class AlterarTutor extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            // TODO add your handling code here:
             alterarTutor();
         } catch (ExceptionDAO ex) {
             Logger.getLogger(AlterarTutor.class.getName()).log(Level.SEVERE, null, ex);
@@ -233,6 +237,10 @@ public class AlterarTutor extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNomeActionPerformed
+
     private void loadTable() throws ExceptionDAO, SQLException{
         DefaultTableModel modelo = (DefaultTableModel)jTableTutores.getModel();
         modelo.setNumRows(0);
@@ -243,8 +251,8 @@ public class AlterarTutor extends javax.swing.JPanel {
             
             modelo.addRow(new Object[]{
                 u.getIdUsuario(),
-                u.getNome(),
-                u.getCpf()
+                u.getCpf(),
+                u.getNome()
             });
             
         }
@@ -258,9 +266,8 @@ public class AlterarTutor extends javax.swing.JPanel {
             Usuario t = new Usuario();
             UsuarioDAO tdao = new UsuarioDAO();
             
-            
-            t.setCpf(txtCpf.getText());
             t.setNome(txtNome.getText());
+            t.setCpf(txtCpf.getText());
             t.setIdUsuario((int) jTableTutores.getValueAt(jTableTutores.getSelectedRow(), 0));
             
             tdao.alterarTutor(t);

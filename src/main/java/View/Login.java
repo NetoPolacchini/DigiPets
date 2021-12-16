@@ -4,17 +4,22 @@
  * and open the template in the editor.
  */
 package View;
+
+import Control.LoginController;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
 /**
  *
  * @author joao_
  */
 public class Login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login
-     */
+    private final LoginController controller;
     public Login() {
+        
         initComponents();
+        controller = new LoginController(this);
     }
 
     /**
@@ -31,9 +36,9 @@ public class Login extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabelSenha = new javax.swing.JLabel();
-        jTextFieldLoginCpf = new javax.swing.JTextField();
+        jTextFieldUsuario = new javax.swing.JTextField();
         jLabelCPF = new javax.swing.JLabel();
-        jPasswordFieldLogin = new javax.swing.JPasswordField();
+        jPasswordFieldSenha = new javax.swing.JPasswordField();
         jButtonEntrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -69,15 +74,15 @@ public class Login extends javax.swing.JFrame {
         jLabelSenha.setText("Senha:");
         background.add(jLabelSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, -1, -1));
 
-        jTextFieldLoginCpf.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        background.add(jTextFieldLoginCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 210, -1));
+        jTextFieldUsuario.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        background.add(jTextFieldUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 210, -1));
 
         jLabelCPF.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabelCPF.setText("CPF:");
         background.add(jLabelCPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, -1, -1));
 
-        jPasswordFieldLogin.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        background.add(jPasswordFieldLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, 210, -1));
+        jPasswordFieldSenha.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        background.add(jPasswordFieldSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, 210, -1));
 
         jButtonEntrar.setBackground(new java.awt.Color(255, 255, 255));
         jButtonEntrar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
@@ -117,7 +122,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel10MouseClicked
 
     private void jButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrarActionPerformed
-        // TODO add your handling code here:
+       controller.consultaLoginESenha();
     }//GEN-LAST:event_jButtonEntrarActionPerformed
 
     /**
@@ -154,6 +159,22 @@ public class Login extends javax.swing.JFrame {
             }
         });
     }
+    
+    public JPasswordField getjPasswordFieldSenha() {
+        return jPasswordFieldSenha;
+    }
+
+    public void setjPasswordFieldSenha(JPasswordField jPasswordFieldSenha) {
+        this.jPasswordFieldSenha = jPasswordFieldSenha;
+    }
+
+    public JTextField getjTextFieldUsuario() {
+        return jTextFieldUsuario;
+    }
+
+    public void setjTextFieldUsuario(JTextField jTextFieldUsuario) {
+        this.jTextFieldUsuario = jTextFieldUsuario;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel background;
@@ -163,7 +184,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabelCPF;
     private javax.swing.JLabel jLabelSenha;
-    private javax.swing.JPasswordField jPasswordFieldLogin;
-    private javax.swing.JTextField jTextFieldLoginCpf;
+    private javax.swing.JPasswordField jPasswordFieldSenha;
+    private javax.swing.JTextField jTextFieldUsuario;
     // End of variables declaration//GEN-END:variables
 }

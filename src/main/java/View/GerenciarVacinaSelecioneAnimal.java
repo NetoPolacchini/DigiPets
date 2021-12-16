@@ -9,6 +9,8 @@ import DAO.ExceptionDAO;
 import Model.Animal;
 import java.awt.BorderLayout;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,9 +23,15 @@ public class GerenciarVacinaSelecioneAnimal extends javax.swing.JPanel {
     /**
      * Creates new form GerenciarVacinaSelecioneAnimal
      */
-    public GerenciarVacinaSelecioneAnimal() throws ExceptionDAO, SQLException {
+    public GerenciarVacinaSelecioneAnimal(){
         initComponents();
-        loadTable();
+        try {
+            loadTable();
+        } catch (ExceptionDAO ex) {
+            Logger.getLogger(GerenciarVacinaSelecioneAnimal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(GerenciarVacinaSelecioneAnimal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

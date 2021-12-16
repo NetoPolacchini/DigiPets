@@ -328,6 +328,14 @@ public class AlterarAnimal extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(AlterarAnimal.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        try {
+            loadTable();
+        } catch (ExceptionDAO ex) {
+            Logger.getLogger(AlterarAnimal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AlterarAnimal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_alterarButtomActionPerformed
 
     private void loadTable() throws ExceptionDAO, SQLException{

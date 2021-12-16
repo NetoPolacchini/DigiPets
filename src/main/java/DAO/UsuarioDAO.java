@@ -28,8 +28,8 @@ public class UsuarioDAO {
             statement.setString(2, usuario.getSenha());
             resultSet = statement.executeQuery();
             resultSet.next();
-            usuario.setCpf(resultSet.getString(3));
-            usuario.setSenha(resultSet.getString(4));
+            usuario.setCpf(resultSet.getString(2));
+            usuario.setSenha(resultSet.getString(3));
             return true;
         } catch (SQLException erro) {
             return false;
@@ -43,6 +43,7 @@ public class UsuarioDAO {
         try{
             connect.getConnection();
             statement = connect.connection.prepareStatement(sql);
+            
             statement.setString(1, usuario.getCpf());
             statement.setString(2, usuario.getNome());
             statement.setString(3, usuario.getSenha());
@@ -56,31 +57,30 @@ public class UsuarioDAO {
         }
     }
     
-    /*public boolean buscarUsuario() {
+    public boolean buscarUsuario() {
         sql = "SELECT * FROM usuario WHERE cpf = ? AND senha = ?";
         try {
             connect.getConnection();
             statement = connect.connection.prepareStatement(sql);
+            
             statement.setString(1, usuario.getCpf());
             statement.setString(2, usuario.getSenha());
             resultSet = statement.executeQuery();
             resultSet.next();
-            usuario.setTipo(resultSet.getString(2));
+            usuario.setNome(resultSet.getString(2));
             usuario.setCpf(resultSet.getString(3));
             usuario.setSenha(resultSet.getString(4));
-            usuario.setNome(resultSet.getString(5));
-            usuario.setCpf(resultSet.getString(6));
-            usuario.setDataDeNascimento(resultSet.getString(9));
-            usuario.setEmail(resultSet.getString(7));
-            usuario.setEndereco(resultSet.getString(8));
+             usuario.setCrm(resultSet.getString(5)); 
+            usuario.setTipoUsuario(resultSet.getInt(6));
+            
             return true;
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro ao buscar!");
             return false;
         } finally {
-            connect.close();
+            //connect.close();
         }
-    }*/
+    }
     
     
     public ArrayList<Usuario> listarTutor() throws ExceptionDAO, SQLException {
@@ -144,6 +144,34 @@ public class UsuarioDAO {
             
         } catch (SQLException e) {
             throw new ExceptionDAO("Erro ao alterar dados de tutor");
+        } finally {
+            try {
+                if (pStatement != null) {
+                    pStatement.close();
+                }
+            } catch (SQLException e) {
+                throw new ExceptionDAO("Erro ao fechar statement " + e);
+            }
+            try {
+                ConnectionMVC.getConnection().close();
+            } catch (SQLException e) {
+                throw new ExceptionDAO("Erro ao fechar conexão " + e);
+            }
+        }
+    }
+    
+    public void removerTutor(Usuario usuario) throws ExceptionDAO{
+        String sql = "DELETE FROM usuario WHERE idUsuario=?";
+        PreparedStatement pStatement = null;
+
+        try {
+
+            pStatement = ConnectionMVC.getConnection().prepareStatement(sql);
+            pStatement.setInt(1, usuario.getIdUsuario());
+            pStatement.execute();
+            
+        } catch (SQLException e) {
+            throw new ExceptionDAO("Erro ao remover tutor");
         } finally {
             try {
                 if (pStatement != null) {

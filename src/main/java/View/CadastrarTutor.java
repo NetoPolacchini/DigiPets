@@ -82,6 +82,11 @@ public class CadastrarTutor extends javax.swing.JPanel {
         jLabel7.setText("CPF:");
 
         jTextFieldSenhaTutor.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        jTextFieldSenhaTutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldSenhaTutorActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel8.setText("Senha de acesso:");
@@ -149,7 +154,15 @@ public class CadastrarTutor extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         CadastrarTutor();
+        
+        jTextFieldNomeTutor.setText("");
+        jTextFieldCpfTutor.setText("");
+        jTextFieldSenhaTutor.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextFieldSenhaTutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSenhaTutorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldSenhaTutorActionPerformed
 
     public void CadastrarTutor() {
         boolean sucesso;
@@ -158,7 +171,7 @@ public class CadastrarTutor extends javax.swing.JPanel {
 
             String nome = jTextFieldNomeTutor.getText();
             String cpf = jTextFieldCpfTutor.getText();
-            String senha = jTextFieldCpfTutor.getText() ;
+            String senha = jTextFieldSenhaTutor.getText() ;
             
             sucesso = UsuarioController.cadastrarTutor(nome, cpf, senha);
 

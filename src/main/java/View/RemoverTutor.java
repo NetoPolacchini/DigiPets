@@ -46,8 +46,6 @@ public class RemoverTutor extends javax.swing.JPanel {
         SubMenu = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jTextFieldCpfTutor = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableTutores = new javax.swing.JTable();
 
@@ -79,11 +77,11 @@ public class RemoverTutor extends javax.swing.JPanel {
         jButton1.setBackground(new java.awt.Color(79, 171, 201));
         jButton1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jButton1.setText("Confirmar");
-
-        jTextFieldCpfTutor.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-
-        jLabel7.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jLabel7.setText("CPF:");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jTableTutores.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTableTutores.setModel(new javax.swing.table.DefaultTableModel(
@@ -121,10 +119,7 @@ public class RemoverTutor extends javax.swing.JPanel {
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(32, 32, 32)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)
-                            .addComponent(jTextFieldCpfTutor, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -134,11 +129,7 @@ public class RemoverTutor extends javax.swing.JPanel {
                 .addComponent(SubMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextFieldCpfTutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(130, 130, 130))
         );
@@ -161,6 +152,24 @@ public class RemoverTutor extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTableTutoresMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            // TODO add your handling code here:
+            removerTutor();
+        } catch (ExceptionDAO ex) {
+            Logger.getLogger(RemoverTutor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(RemoverTutor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            loadTable();
+        } catch (ExceptionDAO ex) {
+            Logger.getLogger(RemoverTutor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(RemoverTutor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void loadTable() throws ExceptionDAO, SQLException{
         DefaultTableModel modelo = (DefaultTableModel)jTableTutores.getModel();
         modelo.setNumRows(0);
@@ -177,15 +186,30 @@ public class RemoverTutor extends javax.swing.JPanel {
         }
     };
     
-
+    public void removerTutor() throws ExceptionDAO, SQLException {
+       
+        if(jTableTutores.getSelectedRow() != -1) {
+        
+            Usuario t = new Usuario();
+            UsuarioDAO tdao = new UsuarioDAO();
+            
+            t.setIdUsuario((int) jTableTutores.getValueAt(jTableTutores.getSelectedRow(), 0));
+            
+            tdao.removerTutor(t);
+            
+           
+            loadTable();
+        }
+  
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel SubMenu;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableTutores;
-    private javax.swing.JTextField jTextFieldCpfTutor;
     // End of variables declaration//GEN-END:variables
 }
