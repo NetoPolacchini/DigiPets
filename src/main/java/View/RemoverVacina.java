@@ -4,6 +4,15 @@
  * and open the template in the editor.
  */
 package View;
+
+import DAO.CarteiraDAO;
+import DAO.ExceptionDAO;
+import Model.Carteira;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author joao_
@@ -13,8 +22,17 @@ public class RemoverVacina extends javax.swing.JPanel {
     /**
      * Creates new form RemoverVacina
      */
-    public RemoverVacina() {
+    private int a;
+    public RemoverVacina(int a) {
+        this.a = a;
         initComponents();
+        try {
+            loadTable(a);
+        } catch (ExceptionDAO ex) {
+            Logger.getLogger(RemoverVacina.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(RemoverVacina.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -29,9 +47,7 @@ public class RemoverVacina extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         SubMenu = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextFieldCodigoVacina = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        buttonRemover = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -60,26 +76,34 @@ public class RemoverVacina extends javax.swing.JPanel {
                 .addContainerGap(80, Short.MAX_VALUE))
         );
 
-        jLabel1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jLabel1.setText("Código da vacina:");
-
-        jTextFieldCodigoVacina.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-
-        jButton1.setBackground(new java.awt.Color(79, 171, 201));
-        jButton1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jButton1.setText("Confirmar");
+        buttonRemover.setBackground(new java.awt.Color(79, 171, 201));
+        buttonRemover.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        buttonRemover.setText("Remover");
+        buttonRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRemoverActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Código", "Nome", "Data aplicação", "Lote", "Data fabricação"
+                "ID", "Nome Vacina", "Data aplicação"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -93,13 +117,10 @@ public class RemoverVacina extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(307, 307, 307)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(buttonRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(81, 81, 81)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldCodigoVacina, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -109,12 +130,8 @@ public class RemoverVacina extends javax.swing.JPanel {
                 .addComponent(SubMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldCodigoVacina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(115, 115, 115)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 223, Short.MAX_VALUE)
+                .addComponent(buttonRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(104, 104, 104))
         );
 
@@ -132,15 +149,56 @@ public class RemoverVacina extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void buttonRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRemoverActionPerformed
+        try {
+            removerVacina();
+        } catch (ExceptionDAO ex) {
+            Logger.getLogger(RemoverVacina.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(RemoverVacina.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_buttonRemoverActionPerformed
 
+    private void loadTable(int a) throws ExceptionDAO, SQLException{
+        DefaultTableModel modelo = (DefaultTableModel)jTable1.getModel();
+        modelo.setNumRows(0);
+        
+        CarteiraDAO cdao = new CarteiraDAO();
+        
+        for(Carteira card: cdao.listarCarteira(a)){
+            
+            modelo.addRow(new Object[]{
+                card.getIdVacina(),
+                card.getNomeVacina(),
+                card.getDataAplicVacina(),
+            });
+        }
+    };
+    
+    public void removerVacina() throws ExceptionDAO, SQLException {
+       
+        if(jTable1.getSelectedRow() != -1) {
+        
+            Carteira c = new Carteira();
+            CarteiraDAO cdao = new CarteiraDAO();
+            
+            c.setIdVacina((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0));
+            
+            cdao.removerCarteira(c);
+            
+           
+            loadTable(a);
+        }
+  
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel SubMenu;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton buttonRemover;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextFieldCodigoVacina;
     // End of variables declaration//GEN-END:variables
 }

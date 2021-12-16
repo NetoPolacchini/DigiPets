@@ -6,13 +6,13 @@ import java.util.Date;
 
 public class Carteira {
     
-    private int cod;
+    private int idCarteiraAnimal;
     private String nomeVacina;
-    private Date dataAplicVacina;
+    private String dataAplicVacina;
     private int idVacina;
 
-    public Carteira(int cod, String nomeVacina, Date dataAplicVacina) {
-       this.cod = cod;
+    public Carteira(int idCarteiraAnimal, String nomeVacina, String dataAplicVacina) {
+       this.idCarteiraAnimal = idCarteiraAnimal;
        this.nomeVacina = nomeVacina;
        this.dataAplicVacina = dataAplicVacina;
     }
@@ -27,20 +27,20 @@ public class Carteira {
         this.nomeVacina = nomeVacina;
     }
 
-    public Date getDataAplicVacina() {
+    public String getDataAplicVacina() {
         return dataAplicVacina;
     }
 
-    public void setDataAplicVacina(Date dataAplicVacina) {
+    public void setDataAplicVacina(String dataAplicVacina) {
         this.dataAplicVacina = dataAplicVacina;
     }
     
-    public int getCod() {
-        return cod;
+    public int getIdCarteiraAnimal() {
+        return idCarteiraAnimal;
     }
 
-    public void setCod(int cod) {
-        this.cod = cod;
+    public void setIdCarteiraAnimal(int cod) {
+        this.idCarteiraAnimal = cod;
     }
 
     public int getIdVacina() {

@@ -12,16 +12,16 @@ import java.util.ArrayList;
 public class CarteiraDAO {
 
     public void cadastrarCarteira(Carteira carteira) throws ExceptionDAO {
-        String sql = "INSERT INTO carteira(idCarteiraAnimal, nomeVacina, dataAplicVacina) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO carteira (idCarteiraAnimal, nomeVacina, dataAplicVacina) VALUES (?, ?, ?)";
         PreparedStatement pStatement = null;
 
         try {
 
             pStatement = ConnectionMVC.getConnection().prepareStatement(sql);
             
-            pStatement.setInt(1, carteira.getCod());
+            pStatement.setInt(1, carteira.getIdCarteiraAnimal());
             pStatement.setString(2, carteira.getNomeVacina());
-            pStatement.setDate(3, (Date) carteira.getDataAplicVacina());
+            pStatement.setString(3, carteira.getDataAplicVacina());
             
             pStatement.execute();
         } catch (SQLException e) {
@@ -43,7 +43,7 @@ public class CarteiraDAO {
     }
 
     public void alterarCarteira(Carteira carteira) throws ExceptionDAO {
-        String sql = "UPDATE carteira SET nomeVacinal=?, dataAplicVacina=? WHERE idCarteiraAnimal=?";
+        String sql = "UPDATE carteira SET nomeVacina=?, dataAplicVacina=? WHERE idVacina=?";
         PreparedStatement pStatement = null;
 
         try {
@@ -51,7 +51,8 @@ public class CarteiraDAO {
             pStatement = ConnectionMVC.getConnection().prepareStatement(sql);
             
             pStatement.setString(1, carteira.getNomeVacina());
-            pStatement.setDate(2, (Date) carteira.getDataAplicVacina());
+            pStatement.setString(2, carteira.getDataAplicVacina());
+            pStatement.setInt(3, carteira.getIdVacina());
             
             pStatement.execute();
         } catch (SQLException e) {
@@ -72,17 +73,18 @@ public class CarteiraDAO {
         }
     }
 
-    public void removerCarteira(Carteira carteira) throws ExceptionDAO {
-        String sql = "DELETE carteira WHERE idVacina=?";
+    public void removerCarteira(Carteira carteira) throws ExceptionDAO{
+        String sql = "DELETE FROM carteira WHERE idVacina=?";
         PreparedStatement pStatement = null;
 
         try {
 
             pStatement = ConnectionMVC.getConnection().prepareStatement(sql);
-            pStatement.setInt(1, carteira.getCod());
+            pStatement.setInt(1, carteira.getIdVacina());
             pStatement.execute();
+            
         } catch (SQLException e) {
-            throw new ExceptionDAO("Erro ao apagar carteira");
+            throw new ExceptionDAO("Erro ao remover carteira");
         } finally {
             try {
                 if (pStatement != null) {
@@ -100,7 +102,7 @@ public class CarteiraDAO {
     }
     
     public ArrayList<Carteira> listarCarteira(int a) throws ExceptionDAO, SQLException {
-        String sql = " SELECT * FROM carteira WHERE idCarteiraAnimal = a";
+        String sql = " SELECT * FROM carteira WHERE idCarteiraAnimal = "+a;
         PreparedStatement pStatement = null;
         ArrayList<Carteira> carteira = null;
 
@@ -116,8 +118,10 @@ public class CarteiraDAO {
                     
                     Carteira card = new Carteira();
                     
-                    card.setCod(rs.getInt("idCarteiraAnimal"));
+                    card.setIdCarteiraAnimal(rs.getInt("idCarteiraAnimal"));
                     card.setNomeVacina(rs.getString("nomeVacina"));
+                    card.setDataAplicVacina(rs.getString("dataAplicVacina"));
+                    card.setIdVacina(rs.getInt("idVacina"));
                     
                     carteira.add(card);
                 }

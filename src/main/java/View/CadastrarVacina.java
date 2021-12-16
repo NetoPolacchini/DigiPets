@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 package View;
+
+import Control.CarteiraController;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author joao_
@@ -13,8 +17,11 @@ public class CadastrarVacina extends javax.swing.JPanel {
     /**
      * Creates new form CadastrarVacina
      */
-    public CadastrarVacina() {
+    private int a;
+    public CadastrarVacina(int a) {
+        this.a=a;
         initComponents();
+        
     }
 
     /**
@@ -33,7 +40,7 @@ public class CadastrarVacina extends javax.swing.JPanel {
         jTextFieldNomeVacina = new javax.swing.JTextField();
         jTextFieldDtAplicacaoVacina = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        buttonCadastrar = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(750, 740));
@@ -70,9 +77,14 @@ public class CadastrarVacina extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel2.setText("Data da aplicação:");
 
-        jButton1.setBackground(new java.awt.Color(79, 171, 201));
-        jButton1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jButton1.setText("Cadastrar");
+        buttonCadastrar.setBackground(new java.awt.Color(79, 171, 201));
+        buttonCadastrar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        buttonCadastrar.setText("Cadastrar");
+        buttonCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCadastrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -95,7 +107,7 @@ public class CadastrarVacina extends javax.swing.JPanel {
                             .addComponent(jTextFieldDtAplicacaoVacina, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(307, 307, 307)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(buttonCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -112,7 +124,7 @@ public class CadastrarVacina extends javax.swing.JPanel {
                     .addComponent(jTextFieldNomeVacina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldDtAplicacaoVacina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 230, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttonCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(104, 104, 104))
         );
 
@@ -130,10 +142,41 @@ public class CadastrarVacina extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void buttonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCadastrarActionPerformed
+        // TODO add your handling code here:
+        CadastrarVacina();
+    }//GEN-LAST:event_buttonCadastrarActionPerformed
+
+    public void CadastrarVacina() {
+        boolean sucesso;
+        try {
+            CarteiraController carteiracontroller = new CarteiraController();
+
+            String nome = jTextFieldNomeVacina.getText();
+            String data = jTextFieldDtAplicacaoVacina.getText();
+            int idAnimal = a;
+            
+            sucesso = CarteiraController.cadastrarCarteira(nome, data, idAnimal );
+
+            if (sucesso == true) {
+
+                JOptionPane.showMessageDialog(null, "Vacina cadastrado com sucesso");
+            } else if (nome.length() <= 0 || nome.length() <= 0 || data.length() <= 0) {
+                JOptionPane.showMessageDialog(null, "Preencha todos os campos.");
+            } else if (data.length() != 10) {
+                JOptionPane.showMessageDialog(null, "A data deve ser DD/MM/AAAA");
+            }else {
+                JOptionPane.showMessageDialog(null, "Erro ao cadastrar Animal");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "error" + ex);
+        }
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel SubMenu;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton buttonCadastrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel9;

@@ -4,6 +4,15 @@
  * and open the template in the editor.
  */
 package View;
+
+import DAO.CarteiraDAO;
+import DAO.ExceptionDAO;
+import Model.Carteira;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author joao_
@@ -13,8 +22,17 @@ public class AlterarVacina extends javax.swing.JPanel {
     /**
      * Creates new form AlterarVacina
      */
-    public AlterarVacina() {
+    private int a;
+    public AlterarVacina(int a) {
+        this.a = a;
         initComponents();
+        try {
+            loadTable(a);
+        } catch (ExceptionDAO ex) {
+            Logger.getLogger(AlterarVacina.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AlterarVacina.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -33,7 +51,7 @@ public class AlterarVacina extends javax.swing.JPanel {
         jTextFieldNomeVacina = new javax.swing.JTextField();
         jTextFieldDtAplicacaoVacina = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        buttonAlterar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -72,9 +90,14 @@ public class AlterarVacina extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel2.setText("Data da aplicação:");
 
-        jButton1.setBackground(new java.awt.Color(79, 171, 201));
-        jButton1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jButton1.setText("Confirmar");
+        buttonAlterar.setBackground(new java.awt.Color(79, 171, 201));
+        buttonAlterar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        buttonAlterar.setText("Alterar");
+        buttonAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAlterarActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -84,7 +107,7 @@ public class AlterarVacina extends javax.swing.JPanel {
                 {null, null, null}
             },
             new String [] {
-                "ID", "Nome", "Data de Aplicacao"
+                "ID", "Nome Vacina", "Data de Aplicacao"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -96,6 +119,11 @@ public class AlterarVacina extends javax.swing.JPanel {
             }
         });
         jTable1.getTableHeader().setReorderingAllowed(false);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -104,14 +132,12 @@ public class AlterarVacina extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(307, 307, 307)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttonAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(81, 81, 81)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addGap(465, 465, 465))
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldNomeVacina, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -119,8 +145,8 @@ public class AlterarVacina extends javax.swing.JPanel {
                         .addGap(262, 262, 262)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jTextFieldDtAplicacaoVacina))
-                        .addGap(465, 465, 465))))
+                            .addComponent(jTextFieldDtAplicacaoVacina))))
+                .addGap(465, 465, 465))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(SubMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -141,7 +167,7 @@ public class AlterarVacina extends javax.swing.JPanel {
                     .addComponent(jTextFieldNomeVacina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldDtAplicacaoVacina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(152, 152, 152)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttonAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(104, 104, 104))
         );
 
@@ -159,10 +185,65 @@ public class AlterarVacina extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void buttonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAlterarActionPerformed
+        try {
+            // TODO add your handling code here:
+            alterarVacina();
+        } catch (ExceptionDAO ex) {
+            Logger.getLogger(AlterarVacina.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AlterarVacina.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_buttonAlterarActionPerformed
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        jTextFieldNomeVacina.setText((String) jTable1.getValueAt(jTable1.getSelectedRow(), 1));
+        jTextFieldDtAplicacaoVacina.setText((String) jTable1.getValueAt(jTable1.getSelectedRow(), 2));
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    
+    private void loadTable(int a) throws ExceptionDAO, SQLException{
+        DefaultTableModel modelo = (DefaultTableModel)jTable1.getModel();
+        modelo.setNumRows(0);
+        
+        CarteiraDAO cdao = new CarteiraDAO();
+        
+        for(Carteira card: cdao.listarCarteira(a)){
+            
+            modelo.addRow(new Object[]{
+                card.getIdVacina(),
+                card.getNomeVacina(),
+                card.getDataAplicVacina(),
+            });
+        }
+    };
+
+    public void alterarVacina() throws ExceptionDAO, SQLException {
+       
+        if(jTable1.getSelectedRow() != -1) {
+        
+            Carteira card = new Carteira();
+            CarteiraDAO cdao = new CarteiraDAO();
+            
+            card.setNomeVacina(jTextFieldNomeVacina.getText());
+            card.setDataAplicVacina(jTextFieldDtAplicacaoVacina.getText());
+            card.setIdVacina((int) jTable1.getValueAt(jTable1.getSelectedRow(), 0));
+
+            
+            cdao.alterarCarteira(card);
+            
+            jTextFieldNomeVacina.setText("");
+            jTextFieldDtAplicacaoVacina.setText("");
+            
+            loadTable(a);
+        }
+  
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel SubMenu;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton buttonAlterar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel9;

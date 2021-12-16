@@ -168,6 +168,7 @@ public class UsuarioDAO {
 
             pStatement = ConnectionMVC.getConnection().prepareStatement(sql);
             pStatement.setInt(1, usuario.getIdUsuario());
+            pStatement.setInt(2, usuario.getIdUsuario());
             pStatement.execute();
             
         } catch (SQLException e) {

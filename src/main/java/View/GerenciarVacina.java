@@ -17,7 +17,9 @@ public class GerenciarVacina extends javax.swing.JPanel {
     /**
      * Creates new form GerenciarVacina
      */
-    public GerenciarVacina() {
+    private int a;
+    public GerenciarVacina(int a) {
+        this.a = a;
         initComponents();
     }
 
@@ -216,7 +218,7 @@ public class GerenciarVacina extends javax.swing.JPanel {
     }//GEN-LAST:event_BotaoCadastrarVacinaMouseMoved
 
     private void BotaoCadastrarVacinaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoCadastrarVacinaMouseClicked
-        CadastrarVacina cadastrarVacina = new CadastrarVacina();
+        CadastrarVacina cadastrarVacina = new CadastrarVacina(a);
         showPanel(cadastrarVacina);
     }//GEN-LAST:event_BotaoCadastrarVacinaMouseClicked
 
@@ -229,7 +231,7 @@ public class GerenciarVacina extends javax.swing.JPanel {
     }//GEN-LAST:event_BotaoAlterarVacinaMouseMoved
 
     private void BotaoAlterarVacinaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoAlterarVacinaMouseClicked
-        AlterarVacina alterarVacina = new AlterarVacina();
+        AlterarVacina alterarVacina = new AlterarVacina(a);
         showPanel(alterarVacina);
     }//GEN-LAST:event_BotaoAlterarVacinaMouseClicked
 
@@ -242,7 +244,7 @@ public class GerenciarVacina extends javax.swing.JPanel {
     }//GEN-LAST:event_BotaoRemoverVacinaMouseMoved
 
     private void BotaoRemoverVacinaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoRemoverVacinaMouseClicked
-        RemoverVacina removerVacina = new RemoverVacina();
+        RemoverVacina removerVacina = new RemoverVacina(a);
         showPanel(removerVacina);
     }//GEN-LAST:event_BotaoRemoverVacinaMouseClicked
 

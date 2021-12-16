@@ -51,8 +51,6 @@ public class GerenciarVacinaSelecioneAnimal extends javax.swing.JPanel {
         SubMenu5 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
-        jTextFieldCodigoAnimal = new javax.swing.JTextField();
-        jLabel18 = new javax.swing.JLabel();
         jScrollPane7 = new javax.swing.JScrollPane();
         jTableTutores5 = new javax.swing.JTable();
 
@@ -90,11 +88,6 @@ public class GerenciarVacinaSelecioneAnimal extends javax.swing.JPanel {
             }
         });
 
-        jTextFieldCodigoAnimal.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-
-        jLabel18.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jLabel18.setText("Código do animal:");
-
         jTableTutores5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTableTutores5.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -130,10 +123,7 @@ public class GerenciarVacinaSelecioneAnimal extends javax.swing.JPanel {
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(32, 32, 32)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel18)
-                            .addComponent(jTextFieldCodigoAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(SubMenu5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -144,11 +134,7 @@ public class GerenciarVacinaSelecioneAnimal extends javax.swing.JPanel {
                 .addComponent(SubMenu5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addComponent(jLabel18)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextFieldCodigoAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(130, 130, 130))
         );
@@ -168,7 +154,7 @@ public class GerenciarVacinaSelecioneAnimal extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        GerenciarVacina gerenciarVacina = new GerenciarVacina();
+        GerenciarVacina gerenciarVacina = new GerenciarVacina((int) jTableTutores5.getValueAt(jTableTutores5.getSelectedRow(), 0));
         showPanel(gerenciarVacina);
     }//GEN-LAST:event_jButton6ActionPerformed
 
@@ -207,10 +193,8 @@ public class GerenciarVacinaSelecioneAnimal extends javax.swing.JPanel {
     private javax.swing.JPanel SubMenu5;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTable jTableTutores5;
-    private javax.swing.JTextField jTextFieldCodigoAnimal;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,9 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CarteiraController {
-    public static boolean cadastrarCarteira(Vacina vacina, Animal animal ) throws ExceptionDAO {
-        if (vacina.getNome_vacina() != null && vacina.getNome_vacina().length() > 0 && animal.getNome() != null && animal.getNome().length() > 0) {
-            Carteira carteira = new Carteira();
+    
+    public static boolean cadastrarCarteira(String nome, String data, int id) throws ExceptionDAO {
+        if (nome != null && nome.length() > 0 && data.length() == 10) {
+            Carteira carteira = new Carteira(id, nome, data);
             Carteira.cadastrarCarteira(carteira);
             return true;
         }
