@@ -1,4 +1,15 @@
 package View;
+
+import DAO.AnimalDAO;
+import DAO.CarteiraDAO;
+import DAO.ExceptionDAO;
+import Model.Animal;
+import Model.Carteira;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author joao_
@@ -8,10 +19,58 @@ public class ConsultarCarteiraVeterinario extends javax.swing.JPanel {
     /**
      * Creates new form ConsultarCarteiraVeterinario
      */
-    public ConsultarCarteiraVeterinario(int a) {
+    private int idAnimal;
+    public ConsultarCarteiraVeterinario(int idAnimal) {
+        this.idAnimal =idAnimal;
         initComponents();
+        
+        try {
+            loadTableVacina(idAnimal);
+        } catch (ExceptionDAO ex) {
+            Logger.getLogger(ConsultarCarteiraVeterinario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultarCarteiraVeterinario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            loadFields(idAnimal);
+        } catch (ExceptionDAO ex) {
+            Logger.getLogger(ConsultarCarteiraVeterinario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ConsultarCarteiraVeterinario.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
+    private void loadTableVacina(int a) throws ExceptionDAO, SQLException{
+        DefaultTableModel modelo = (DefaultTableModel)jTable1.getModel();
+        modelo.setNumRows(0);
+        
+        CarteiraDAO cdao = new CarteiraDAO();
+        
+        for(Carteira card: cdao.listarCarteira(a)){
+            
+            modelo.addRow(new Object[]{
+                card.getNomeVacina(),
+                card.getDataAplicVacina(),
+            });
+        }
+    };
+    
+    private void loadFields(int a) throws ExceptionDAO, SQLException{
+        AnimalDAO adao = new AnimalDAO();
+        
+        for(Animal ani: adao.listarAnimalFields(a)){
+            
+            jTextFieldNomeAnimal.setText(ani.getNome());
+            jTextFieldEpecieAnimal.setText(ani.getEspecie());
+            jTextFieldRacaAnimal.setText(ani.getRaca());
+            jTextFieldObsGeraisAnimal.setText(ani.getObsGerais());
+            jTextFieldRacaAnimal1.setText(ani.getSexo());
+            
+           
+        }
+    }
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -24,23 +83,16 @@ public class ConsultarCarteiraVeterinario extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jTextFieldNomeAnimal = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextFieldDtNascAnimal = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jRadioButtonMacho = new javax.swing.JRadioButton();
-        jRadioButtonFemea = new javax.swing.JRadioButton();
         jLabel7 = new javax.swing.JLabel();
         jTextFieldEpecieAnimal = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jTextFieldRacaAnimal = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextFieldPesoAnimal = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        jTextFieldPelagemAnimal = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
         jTextFieldObsGeraisAnimal = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jTextFieldRacaAnimal1 = new javax.swing.JTextField();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(750, 740));
@@ -77,20 +129,6 @@ public class ConsultarCarteiraVeterinario extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel5.setText("Nome do animal:");
 
-        jTextFieldDtNascAnimal.setEditable(false);
-        jTextFieldDtNascAnimal.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-
-        jLabel6.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jLabel6.setText("Data de nascimento:");
-
-        buttonGroup1.add(jRadioButtonMacho);
-        jRadioButtonMacho.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jRadioButtonMacho.setText("macho");
-
-        buttonGroup1.add(jRadioButtonFemea);
-        jRadioButtonFemea.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jRadioButtonFemea.setText("femea");
-
         jLabel7.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel7.setText("Sexo:");
 
@@ -105,18 +143,6 @@ public class ConsultarCarteiraVeterinario extends javax.swing.JPanel {
 
         jLabel10.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jLabel10.setText("Raça:");
-
-        jTextFieldPesoAnimal.setEditable(false);
-        jTextFieldPesoAnimal.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-
-        jLabel11.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jLabel11.setText("Peso:");
-
-        jTextFieldPelagemAnimal.setEditable(false);
-        jTextFieldPelagemAnimal.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-
-        jLabel12.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jLabel12.setText("Pelagem:");
 
         jTextFieldObsGeraisAnimal.setEditable(false);
         jTextFieldObsGeraisAnimal.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
@@ -137,8 +163,19 @@ public class ConsultarCarteiraVeterinario extends javax.swing.JPanel {
             new String [] {
                 "Nome da vacina", "Data de aplicação"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
+
+        jTextFieldRacaAnimal1.setEditable(false);
+        jTextFieldRacaAnimal1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -157,42 +194,28 @@ public class ConsultarCarteiraVeterinario extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jTextFieldEpecieAnimal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
-                                .addComponent(jTextFieldNomeAnimal, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextFieldPelagemAnimal, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addComponent(jTextFieldNomeAnimal, javax.swing.GroupLayout.Alignment.LEADING))
                             .addComponent(jLabel8)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel12))
+                            .addComponent(jLabel5))
                         .addGap(36, 36, 36)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel13)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldDtNascAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6)
                                     .addComponent(jTextFieldRacaAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel10))
-                                .addGap(68, 68, 68)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldPesoAnimal)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel11)
-                                            .addComponent(jLabel7)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jRadioButtonMacho)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jRadioButtonFemea)))
-                                        .addGap(0, 0, Short.MAX_VALUE)))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextFieldObsGeraisAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(68, 68, 68)
+                                        .addComponent(jLabel7))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(53, 53, 53)
+                                        .addComponent(jTextFieldRacaAnimal1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jTextFieldObsGeraisAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(28, 28, 28)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,33 +225,22 @@ public class ConsultarCarteiraVeterinario extends javax.swing.JPanel {
                 .addGap(42, 42, 42)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldNomeAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldDtNascAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButtonMacho)
-                    .addComponent(jRadioButtonFemea))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                    .addComponent(jTextFieldRacaAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldRacaAnimal1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel11))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldEpecieAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldRacaAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldPesoAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
                     .addComponent(jLabel13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldPelagemAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldEpecieAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldObsGeraisAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                .addGap(107, 107, 107)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(102, 102, 102)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -255,25 +267,18 @@ public class ConsultarCarteiraVeterinario extends javax.swing.JPanel {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButtonFemea;
-    private javax.swing.JRadioButton jRadioButtonMacho;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextFieldDtNascAnimal;
     private javax.swing.JTextField jTextFieldEpecieAnimal;
     private javax.swing.JTextField jTextFieldNomeAnimal;
     private javax.swing.JTextField jTextFieldObsGeraisAnimal;
-    private javax.swing.JTextField jTextFieldPelagemAnimal;
-    private javax.swing.JTextField jTextFieldPesoAnimal;
     private javax.swing.JTextField jTextFieldRacaAnimal;
+    private javax.swing.JTextField jTextFieldRacaAnimal1;
     // End of variables declaration//GEN-END:variables
 }

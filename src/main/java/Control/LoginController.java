@@ -1,11 +1,17 @@
 package Control;
 
+import DAO.ConnectionMVC;
+import DAO.ExceptionDAO;
 import DAO.UsuarioDAO;
 import Model.Usuario;
 import View.HomeTutor;
 import View.HomeVeterinario;
 import View.Login;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class LoginController {
@@ -18,6 +24,7 @@ public class LoginController {
     public LoginController(Login view){
         this.view = view;
     }
+    public LoginController(){}
 
     
     
@@ -45,4 +52,47 @@ public class LoginController {
         }
     }
 
+    public boolean checkLogin(String login, String senha) throws ExceptionDAO, SQLException {
+        String sql = " SELECT * FROM usuario WHERE cpf = ? and senha = ?";
+        PreparedStatement pStatement = null;
+        boolean check = false;
+
+        try {
+            pStatement = ConnectionMVC.getConnection().prepareStatement(sql);
+            ResultSet rs = pStatement.executeQuery(sql);
+            pStatement.setString(1, login);
+            pStatement.setString(2, senha);
+            pStatement.execute();
+           
+            
+            if (rs != null) {
+                
+                if (rs.next()) {
+                    
+                    check = true;
+                    
+                }
+            }
+        } catch (SQLException e) {
+            throw new ExceptionDAO("Erro ao consultar item");
+        } finally {
+            try {
+                if (pStatement != null) {
+                    pStatement.close();
+                }
+            } catch (SQLException e) {
+                throw new ExceptionDAO("Erro ao fechar o pStatement" + e);
+            }
+        }
+         try {
+                if (pStatement != null) {
+                    pStatement.close();
+                }
+        } catch (SQLException e) {
+            throw new ExceptionDAO("Erro ao fechar conexão" + e);
+        }
+
+        return check;
+    }
+    
 }

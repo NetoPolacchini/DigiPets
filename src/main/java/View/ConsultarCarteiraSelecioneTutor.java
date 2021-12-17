@@ -158,7 +158,7 @@ public class ConsultarCarteiraSelecioneTutor extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        ConsultarCarteiraSelecioneAnimal consultarCarteiraSelecioneAnimal = new ConsultarCarteiraSelecioneAnimal();
+        ConsultarCarteiraSelecioneAnimal consultarCarteiraSelecioneAnimal = new ConsultarCarteiraSelecioneAnimal((int) jTableTutores5.getValueAt(jTableTutores5.getSelectedRow(), 0));
         showPanel(consultarCarteiraSelecioneAnimal);
     }//GEN-LAST:event_jButton6ActionPerformed
 

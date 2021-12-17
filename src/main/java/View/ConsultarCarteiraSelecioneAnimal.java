@@ -24,15 +24,18 @@ public class ConsultarCarteiraSelecioneAnimal extends javax.swing.JPanel {
      * Creates new form ConsultarCarteiraSelecioneAnimal
      * @throws DAO.ExceptionDAO
      */
-    public ConsultarCarteiraSelecioneAnimal() {
+    private int a;
+    public ConsultarCarteiraSelecioneAnimal(int a) {
+        this.a = a;
         initComponents();
         try {
-            loadTable();
+            loadTable(a);
         } catch (ExceptionDAO ex) {
             Logger.getLogger(ConsultarCarteiraSelecioneAnimal.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(ConsultarCarteiraSelecioneAnimal.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
     /**
@@ -177,22 +180,21 @@ public class ConsultarCarteiraSelecioneAnimal extends javax.swing.JPanel {
         this.repaint();
     }
     
-    private void loadTable() throws ExceptionDAO, SQLException{
+    private void loadTable(int a) throws ExceptionDAO, SQLException{
         DefaultTableModel modelo = (DefaultTableModel)jTableTutores5.getModel();
         modelo.setNumRows(0);
         
         AnimalDAO adao = new AnimalDAO();
         
-        for(Animal a: adao.listarAnimal()){
+        for(Animal ani: adao.listarAnimalTutor(a)){
             
             modelo.addRow(new Object[]{
-                a.getCod(),
-                a.getNome(),
-                a.getEspecie()
+                ani.getCod(),
+                ani.getNome(),
+                ani.getRaca(),
+                ani.getEspecie()
             });
-            
         }
-        
     };
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

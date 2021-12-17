@@ -6,6 +6,12 @@
 package View;
 
 import Control.LoginController;
+import DAO.ExceptionDAO;
+import DAO.UsuarioDAO;
+import Model.Usuario;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -122,7 +128,24 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel10MouseClicked
 
     private void jButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrarActionPerformed
-       controller.consultaLoginESenha();
+       LoginController a = new LoginController();
+       boolean b = false;
+       
+        try {
+            b = a.checkLogin(jTextFieldUsuario.getText(), jPasswordFieldSenha.getText());
+        } catch (ExceptionDAO ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if(b==false){
+            
+        }else {
+            HomeVeterinario home = new HomeVeterinario();
+            home.setVisible(true);
+        }
+       
     }//GEN-LAST:event_jButtonEntrarActionPerformed
 
     /**

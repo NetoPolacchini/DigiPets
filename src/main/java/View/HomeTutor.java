@@ -210,9 +210,8 @@ public class HomeTutor extends javax.swing.JFrame {
 
     private void BotaoConsultarCarteiraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoConsultarCarteiraMouseClicked
         
-        ConsultarCarteiraSelecioneAnimal consultarCarteiraSelecioneAnimal = new ConsultarCarteiraSelecioneAnimal();
-        showPanel(consultarCarteiraSelecioneAnimal);
-
+        //ConsultarCarteiraSelecioneAnimal consultarCarteiraSelecioneAnimal = new ConsultarCarteiraSelecioneAnimal();
+        //
     }//GEN-LAST:event_BotaoConsultarCarteiraMouseClicked
 
     private void BotaoConsultarCarteiraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotaoConsultarCarteiraMousePressed
