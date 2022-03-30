@@ -14,7 +14,7 @@ static Connection connection = null;
             e.printStackTrace();
         }
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/digipetsnew", "root", "Defesaforte1!");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/digipetsnew", "root", "senha!");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -26,7 +26,7 @@ static Connection connection = null;
             e.printStackTrace();
         }
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/digipetsnew", "root", "Defesaforte1!");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/digipetsnew", "root", "senha!");
         } catch (SQLException e) {
             e.printStackTrace();
         } 
